@@ -1,4 +1,5 @@
 import { ProductItemType } from "@/ui/types";
+import { formatMoney } from "@/utils";
 
 type ProductListItemDescriptionProps = {
 	product: ProductItemType;
@@ -20,7 +21,8 @@ export const ProductListItemDescription = ({
 				</p>
 			</div>
 			<p className="text-sm font-medium text-gray-900">
-				<span className="sr-only">Kategoria: </span> {price}$
+				<span className="sr-only">Kategoria: </span>{" "}
+				{formatMoney(price / 100)}
 			</p>
 		</div>
 	);
