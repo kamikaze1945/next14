@@ -1,4 +1,4 @@
-import { ProductListItem } from "@/ui/molecules/ProductListItem";
+import { ProductItem } from "@/ui/molecules/ProductItem";
 import { ProductItemType } from "@/ui/types";
 
 export const ProductList = ({
@@ -9,7 +9,7 @@ export const ProductList = ({
 	return (
 		<ul data-testid="products-list" className="md-grid-cols-3 my-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
 			{products.map((product) => (
-				<ProductListItem key={product.id} product={product} />
+				<ProductItem key={product.id} product={product} />
 			))}
 		</ul>
 	);
