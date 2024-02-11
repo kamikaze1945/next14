@@ -2,18 +2,29 @@ import { getProductById, getProductList } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { SuggestedProductList } from "@/ui/organisms/SuggestedProductList";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
-// generate static pages when use build production
-// export const generateStaticPage = async () => {
-// 	const products = await getProductList();
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { productId: string };
+}): Promise<Metadata> => {
+	const product = await getProductById(params.productId);
+	return {
+		title: `${product.name}`,
+		description: `${product.desription}`,
+	};
+};
 
-// 	return products
-// 		.map((product) => ({
-// 			params: { productId: product.id },
-// 		}))
-// 		.slice(0, 2);
-// };
+//generate static pages when use build production
+export const generateStaticParams = async () => {
+	const products = await getProductList();
+
+	return products.map((product) => ({
+		productId: product.id,
+	}));
+};
 
 export default async function SingleProduct({
 	params,

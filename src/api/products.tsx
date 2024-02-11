@@ -1,7 +1,6 @@
 import { ProductItemType, ProductResponseItem } from "@/ui/types";
 
 export const getProductList = async () => {
-	
 	const res = await fetch(
 		"https://naszsklep-api.vercel.app/api/products",
 	);
@@ -38,5 +37,6 @@ const productResponseItemToProductItemType = (
 			src: product.image,
 			alt: product.title,
 		},
+		desription: product.description,
 	};
 };

@@ -7,6 +7,7 @@ export type ProductItemType = {
 		src: string;
 		alt: string;
 	};
+	desription: string;
 };
 
 export type ProductResponseItem = {
