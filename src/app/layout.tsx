@@ -29,7 +29,6 @@ export default function RootLayout({
 							<ActiveLink
 								href="/products"
 								partialMatch={true}
-								title="All products"
 							>
 								All
 							</ActiveLink>

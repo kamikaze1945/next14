@@ -3,40 +3,28 @@
 import clsx from "clsx";
 import Link from "next/link";
 import type { Route } from "next";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 export const ActiveLink = <T extends string>({
 	href,
 	children,
+	title,
 	exact = false,
 	partialMatch = false,
 	className = "text-blue-400 hover:text-blue-600",
 	activeClassName = "underline",
-	title,
 }: {
-	href: Route<T> | URL;
+	href: Route<T> | URL; //UrlObject | string | Route<T> | URL;
 	children: ReactNode;
 	exact?: boolean;
+	title?: string;
 	partialMatch?: boolean;
 	className?: string;
 	activeClassName?: string;
-	title?: string;
 }) => {
 	const pathname = usePathname();
-
-	const isActive = partialMatch
-		? pathname.startsWith(href.toString())
-		: exact
-			? pathname === href
-			: pathname.includes(href.toString());
-
-	//todo: delete console.log
-	if (isActive) {
-		console.log("pathname", pathname);
-		console.log("href", href);
-	}
-
+	const isActive = pathname === href;
 	return (
 		<Link
 			href={href}
@@ -44,7 +32,6 @@ export const ActiveLink = <T extends string>({
 			className={clsx(className, {
 				[activeClassName]: isActive,
 			})}
-			title={title ?? title}
 			passHref
 		>
 			{children}
