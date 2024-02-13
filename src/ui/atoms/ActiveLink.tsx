@@ -6,24 +6,46 @@ import type { Route } from "next";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
-export const ActiveLink = ({
+export const ActiveLink = <T extends string>({
 	href,
 	children,
+	exact = false,
+	partialMatch = false,
+	className = "text-blue-400 hover:text-blue-600",
+	activeClassName = "underline",
+	title,
 }: {
-	href: string;
+	href: Route<T> | URL;
 	children: ReactNode;
+	exact?: boolean;
+	partialMatch?: boolean;
+	className?: string;
+	activeClassName?: string;
+	title?: string;
 }) => {
 	const pathname = usePathname();
-	const isActive = pathname === href;
 
-	console.log("pathname", pathname);
-	console.log("href", href);
+	const isActive = partialMatch
+		? pathname.startsWith(href.toString())
+		: exact
+			? pathname === href
+			: pathname.includes(href.toString());
+
+	//todo: delete console.log
+	if (isActive) {
+		console.log("pathname", pathname);
+		console.log("href", href);
+	}
+
 	return (
 		<Link
-			href={{pathname: href}} // Update the href prop to be of type UrlObject
-			className={clsx(` text-blue-400 hover:text-blue-600`, {
-				underline: isActive,
+			href={href}
+			aria-current={isActive ? "page" : undefined}
+			className={clsx(className, {
+				[activeClassName]: isActive,
 			})}
+			title={title ?? title}
+			passHref
 		>
 			{children}
 		</Link>

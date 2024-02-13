@@ -18,7 +18,6 @@ export type ProductResponseItem = {
 	category: string;
 	rating: Rating;
 	image: string;
-	longDescription: string;
 };
 
 export type Rating = {

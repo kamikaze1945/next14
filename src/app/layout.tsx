@@ -21,13 +21,18 @@ export default function RootLayout({
 				<nav>
 					<ul className="mt-2 flex justify-center space-x-4 ">
 						<li>
-							<ActiveLink href="/">Home</ActiveLink>
+							<ActiveLink href="/" exact title="Home">
+								Home
+							</ActiveLink>
 						</li>
 						<li>
-							<ActiveLink href="/products">Products</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink href="/blog">Blog</ActiveLink>
+							<ActiveLink
+								href="/products"
+								partialMatch={true}
+								title="All products"
+							>
+								All
+							</ActiveLink>
 						</li>
 					</ul>
 				</nav>

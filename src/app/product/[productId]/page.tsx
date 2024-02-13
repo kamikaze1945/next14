@@ -33,7 +33,7 @@ export default async function SingleProduct({
 	params: { productId: string };
 	searchParams: { [key: string]: string | string[] };
 }) {
-	//	const referral = searchParams.referral?.toString();
+	const referral = searchParams.referral?.toString();
 
 	const product = await getProductById(params.productId);
 

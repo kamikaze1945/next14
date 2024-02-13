@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Cateogry products",
+	description:
+		"Category products list - you can find here all products.",
+};
+
 export default function SingleCategoryProductList({
 	params: { category },
 }: {
