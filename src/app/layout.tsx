@@ -26,12 +26,7 @@ export default function RootLayout({
 							</ActiveLink>
 						</li>
 						<li>
-							<ActiveLink
-								href="/products"
-								partialMatch={true}
-							>
-								All
-							</ActiveLink>
+							<ActiveLink href="/products">All</ActiveLink>
 						</li>
 					</ul>
 				</nav>
