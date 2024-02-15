@@ -1,13 +1,15 @@
 export type ProductItemType = {
 	id: string;
-	name: string;
+	title: string;
 	category: string;
 	price: number;
+	description: string;
+	longDescription: string;
 	coverImage: {
 		src: string;
 		alt: string;
 	};
-	desription: string;
+	rating: Rating;
 };
 
 export type ProductResponseItem = {
@@ -15,6 +17,7 @@ export type ProductResponseItem = {
 	title: string;
 	price: number;
 	description: string;
+	longDescription: string;
 	category: string;
 	rating: Rating;
 	image: string;

@@ -6,23 +6,27 @@ import type { Route } from "next";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
-export const ActiveLink = ({
+type ActiveLinkProps<T extends string> = {
+	href: Route<T>;
+	children: ReactNode;
+	exact?: boolean;
+	title?: string;
+	className?: string;
+	activeClassName?: string;
+};
+
+export const ActiveLink = <T extends string>({
 	href,
 	children,
 	title,
 	exact = false,
 	className = "text-blue-400 hover:text-blue-600",
 	activeClassName = "underline",
-}: {
-	href: Route | URL;
-	children: ReactNode;
-	exact?: boolean;
-	title?: string;
-	className?: string;
-	activeClassName?: string;
-}) => {
+}: ActiveLinkProps<T>) => {
 	const pathname = usePathname();
-	const isActive = pathname === href;
+	const isActive = exact
+		? pathname === href
+		: pathname.startsWith(href as string);
 
 	return (
 		<Link
@@ -31,6 +35,7 @@ export const ActiveLink = ({
 			className={clsx(className, {
 				[activeClassName]: isActive,
 			})}
+			title={title}
 			passHref
 		>
 			{children}
