@@ -1,4 +1,7 @@
-import { getPaginationProductList } from "@/api/products";
+import {
+	getAllPagesByUrl,
+	getPaginationProductList,
+} from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { Metadata } from "next";
@@ -35,12 +38,18 @@ export default async function ProductsPage({
 	const products = await getPaginationProductList(20, offset);
 
 	const pageNumber = params.page ? Number(params.page[0]) : 0;
-	const productsCount = await getPaginationProductList();
-	const totalPages = Math.ceil(productsCount.length / 20);
+	// const productsCount = await getPaginationProductList();
+	//const totalPages = Math.ceil(productsCount.length / 20);
 
+	const productDataCount = await getAllPagesByUrl(
+		"https://naszsklep-api.vercel.app/api/products",
+		4000,
+		0,
+	);
+	const totalPages = Math.ceil(productDataCount?.totalRecords / 20);
+	console.log("ProductsPage productData", productDataCount);
 	return (
 		<>
-			<Pagination pageNumber={pageNumber} totalPages={totalPages} />
 			<ProductList products={products || []} />
 			<Pagination pageNumber={pageNumber} totalPages={totalPages} />
 		</>

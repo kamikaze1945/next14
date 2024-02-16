@@ -1,4 +1,5 @@
 import { ProductItemType, ProductResponseItem } from "@/ui/types";
+import { url } from "inspector";
 
 //todo: dodać obsługę
 //const apiUrl = process.env.API_URL;
@@ -71,4 +72,44 @@ export const getPaginationProductList = async (
 	);
 
 	return products;
+};
+
+export const getAllPagesByUrl = async (
+	href: string,
+	take?: number,
+	offset2?: number,
+) => {
+	let pageCounts: number = 0;
+	let nextPage = true;
+	let totalRecords = 0;
+	let responseData: ProductResponseItem[] = [];
+
+	while (nextPage) {
+		const offset = take ? pageCounts * take : 0;
+		const takeQueryParam = take ? `?take=${take}` : "";
+		const offsetQueryParam = `&offset=${offset}`;
+		const url = `${href}${takeQueryParam}${offsetQueryParam}`;
+
+		const response = await fetch(url);
+		const jsonData = await response.json();
+		const currentPageRecords = jsonData.length || 0;
+		console.log(jsonData);
+
+		console.log(
+			"API getAllPagesByUrl currentPageRecords:",
+			url,
+			currentPageRecords,
+		);
+
+		if (currentPageRecords > 0) {
+			//if (currentPageRecords > 0) {
+			//responseData = responseData.concat(jsonData);
+			totalRecords += currentPageRecords;
+			pageCounts++;
+		} else {
+			nextPage = false;
+		}
+	}
+
+	return { totalRecords, pageCounts, takePage: take };
 };
