@@ -7,7 +7,6 @@ type ProductsLayoutProps = {
 
 export default async function ProductsLayout({
 	children,
-	params,
 }: ProductsLayoutProps) {
 	return (
 		<>

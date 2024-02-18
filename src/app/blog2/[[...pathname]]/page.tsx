@@ -9,7 +9,7 @@
  * /blog/123 or /blog/123/456 - work perfect
  */
 
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Blog example page",
@@ -27,7 +27,7 @@ export default async function BlogPage({
 
 	return (
 		<article>
-			<h1 className="text-4xl font-bold">Blog  {pathname2}`</h1>
+			<h1 className="text-4xl font-bold">Blog {pathname2}`</h1>
 			<div>
 				Lorem ipsum Lorem ipsum dolor sit amet, consectetur
 				adipisicing elit. Unde dignissimos qui ut hic, illum quod quis

@@ -1,9 +1,9 @@
+import { Suspense } from "react";
+import type { Metadata } from "next";
 import { getProductById, getProductList } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { SuggestedProductList } from "@/ui/organisms/SuggestedProductList";
-import { Metadata } from "next";
-import { Suspense } from "react";
 
 export const generateMetadata = async ({
 	params,
@@ -39,7 +39,7 @@ export default async function SingleProduct({
 
 	return (
 		<>
-			<article className="max-w-xs">
+			<article className="max-w-xs" data-referral={referral}>
 				<ProductCoverImage {...product.coverImage} />
 				<ProductItemDescription product={product} />
 			</article>

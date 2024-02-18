@@ -1,11 +1,10 @@
+import { type Metadata } from "next";
 import {
 	getAllPagesByUrl,
 	getPaginationProductList,
 } from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { Metadata } from "next";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "All products",
@@ -42,7 +41,6 @@ export default async function ProductsPage({
 	const productDataCount = await getAllPagesByUrl(
 		"https://naszsklep-api.vercel.app/api/products",
 		4000,
-		0,
 	);
 	const totalPages = Math.ceil(productDataCount?.totalRecords / 20);
 

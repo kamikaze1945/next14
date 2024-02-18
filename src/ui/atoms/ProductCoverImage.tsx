@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const ProductCoverImage = ({
 	src,
 	alt,
@@ -7,7 +9,8 @@ export const ProductCoverImage = ({
 }) => {
 	return (
 		<div className="oferflow-hidden aspect-square rounded-md border bg-slate-50 hover:bg-slate-100">
-			<img
+			<Image
+				height={320}
 				width={320}
 				src={src}
 				alt={alt}

@@ -1,6 +1,4 @@
-import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { PaginationAllPages } from "@/ui/molecules/PaginationAllPages";
-import type { Route } from "next";
 
 type PaginationProps = {
 	pageNumber: number;

@@ -1,10 +1,10 @@
 "use client";
 
-import { type ReactNode, useState, useEffect } from "react";
-import { ActiveLink } from "@/ui/atoms/ActiveLink";
-import { Route } from "next";
-import { Logo } from "@/ui/atoms/Logo";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
+import { type Route } from "next";
+import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { Logo } from "@/ui/atoms/Logo";
 
 export const Navigation = () => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
@@ -36,7 +36,7 @@ export const Navigation = () => {
 
 					<ActiveLink
 						href="/"
-						className="rounded-lg bg-purple-700 px-4 py-2 text-sm font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 sm:mr-2 lg:mr-0 lg:px-5 lg:py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+						className="px-4 py-2 text-sm font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 sm:mr-2 lg:mr-0 lg:px-5 lg:py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
 					>
 						Shop
 					</ActiveLink>

@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type ActiveLinkProps<T extends string> = {
 	href: Route<T>;

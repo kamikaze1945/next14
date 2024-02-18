@@ -1,4 +1,4 @@
-import { ProductItemType } from "@/ui/types";
+import { type ProductItemType } from "@/ui/types";
 import { formatMoney } from "@/utils";
 
 type ProductItemDescriptionProps = {
@@ -6,7 +6,7 @@ type ProductItemDescriptionProps = {
 };
 
 export const ProductItemDescription = ({
-	product: { title, category, price, description },
+	product: { title, category, price },
 }: ProductItemDescriptionProps) => {
 	return (
 		<div className="justif-between mt-2 flex">

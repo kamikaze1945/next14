@@ -24,6 +24,7 @@
 	"include": [
 		"next-env.d.ts",
 		"**/*.ts",
+		// Adjust the pattern below to match your project structure
 		"**/*.tsx",
 		".next/types/**/*.ts"
 	],

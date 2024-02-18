@@ -1,16 +1,18 @@
-import { ProductItemType, ProductResponseItem } from "@/ui/types";
-import { url } from "inspector";
+import type {
+	ProductItemType,
+	ProductResponseItem,
+} from "@/ui/types";
 
 //todo: dodać obsługę
 //const apiUrl = process.env.API_URL;
 
 export const getProductList = async () => {
-	const res = await fetch(
+	const response = await fetch(
 		"https://naszsklep-api.vercel.app/api/products",
 	);
 
 	const productsResponse =
-		(await res.json()) as ProductResponseItem[];
+		(await response.json()) as ProductResponseItem[];
 	const products = productsResponse.map(
 		productResponseItemToProductItemType,
 	);
@@ -21,11 +23,12 @@ export const getProductList = async () => {
 export const getProductById = async (
 	id: ProductResponseItem["id"],
 ) => {
-	const res = await fetch(
+	const response = await fetch(
 		`https://naszsklep-api.vercel.app/api/products/${id}`,
 	);
 
-	const productResponse = (await res.json()) as ProductResponseItem;
+	const productResponse =
+		(await response.json()) as ProductResponseItem;
 	return productResponseItemToProductItemType(productResponse);
 };
 
@@ -58,15 +61,14 @@ export const getPaginationProductList = async (
 	const offsetQueryParam = offset ? `&offset=${offset}` : "";
 	const url = `https://naszsklep-api.vercel.app/api/products${takeQueryParam}${offsetQueryParam}`;
 
-	console.log("getPaginationProductList url:", url);
-	const res = await fetch(`${url}`);
+	const response = await fetch(`${url}`);
 
-	if (!res.ok) {
+	if (!response.ok) {
 		throw new Error("Failed to fetch products");
 	}
 
 	const productsResponse =
-		(await res.json()) as ProductResponseItem[];
+		(await response.json()) as ProductResponseItem[];
 	const products = productsResponse.map(
 		productResponseItemToProductItemType,
 	);
@@ -77,12 +79,10 @@ export const getPaginationProductList = async (
 export const getAllPagesByUrl = async (
 	href: string,
 	take?: number,
-	offset2?: number,
 ) => {
 	let pageCounts: number = 0;
 	let nextPage = true;
 	let totalRecords = 0;
-	let responseData: ProductResponseItem[] = [];
 
 	while (nextPage) {
 		const offset = take ? pageCounts * take : 0;
@@ -91,19 +91,18 @@ export const getAllPagesByUrl = async (
 		const url = `${href}${takeQueryParam}${offsetQueryParam}`;
 
 		const response = await fetch(url);
-		const jsonData = await response.json();
-		const currentPageRecords = jsonData.length || 0;
-		console.log(jsonData);
+		const productsResponse =
+			(await response.json()) as ProductResponseItem[];
+		const currentPageRecords = productsResponse.length || 0;
+		console.log("currentPageRecords", currentPageRecords);
+		// const products = productsResponse.map(
+		// 	productResponseItemToProductItemType,
+		// );
 
-		console.log(
-			"API getAllPagesByUrl currentPageRecords:",
-			url,
-			currentPageRecords,
-		);
+		// const jsonData = await response.json();
+		// const currentPageRecords = jsonData.length || 0;
 
 		if (currentPageRecords > 0) {
-			//if (currentPageRecords > 0) {
-			//responseData = responseData.concat(jsonData);
 			totalRecords += currentPageRecords;
 			pageCounts++;
 		} else {

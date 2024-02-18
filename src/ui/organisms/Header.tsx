@@ -1,7 +1,4 @@
-import { Hamburger } from "@/ui/atoms/Hamburger";
-import { Logo } from "@/ui/atoms/Logo";
 import { Navigation } from "@/ui/molecules/Navigation";
-import Link from "next/link";
 
 export const Header = () => {
 	return (
