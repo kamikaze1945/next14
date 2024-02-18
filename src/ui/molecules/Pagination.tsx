@@ -15,7 +15,7 @@ export const Pagination = ({
 	return (
 		<section
 			aria-label="pagination"
-			className="spx-4 flex items-center justify-center py-10 sm:px-6 lg:px-0"
+			className="spx-4 bord flex items-center justify-center py-10 sm:px-6 lg:px-0"
 		>
 			{typePagination === "all" ? (
 				<PaginationAllPages

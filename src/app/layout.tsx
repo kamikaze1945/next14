@@ -1,7 +1,8 @@
 import type { Metadata, Route } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { Header } from "@/ui/organisms/Header";
+import { Footer } from "@/ui/organisms/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,27 +17,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="pl">
 			<body className={inter.className}>
-				<nav>
-					<ul className="mt-2 flex justify-center space-x-4 ">
-						<li>
-							<ActiveLink href="/" exact title="Home">
-								Home
-							</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink href={("/products" as Route)}>All</ActiveLink>
-						</li>
-					</ul>
-				</nav>
-
-				<section className="max-w-dp-12 sm:max-w-wxl mx-auto sm:py-16 md:max-w-4xl lg:max-w-7xl">
+				<Header />
+				<main className="max-w-dp-12 sm:max-w-wxl mx-auto sm:py-16 md:max-w-4xl lg:max-w-7xl">
 					{children}
-				</section>
-				<footer className="py-8 text-center text-sm text-gray-500">
-					© 2024
-				</footer>
+				</main>
+				<Footer />
 			</body>
 		</html>
 	);
