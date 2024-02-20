@@ -7,9 +7,9 @@ import type {
 	ProductResponseItem,
 } from "@/ui/types";
 
-type GraphQLResponse<T> =
-	| { data?: undefined; errors: { message: string }[] }
-	| { data: T; errors?: undefined };
+// type GraphQLResponse<T> =
+// 	| { data?: undefined; errors: { message: string }[] }
+// 	| { data: T; errors?: undefined };
 
 const executeGraphql = async <TResult, TVariables>(
 	query: TypedDocumentString<TResult, TVariables>,
@@ -58,7 +58,7 @@ export const getProductList = async (): Promise<
 		return {
 			id: p.id,
 			name: p.name,
-			categories: p.categories,
+			category: p.categories[0]?.name || "",
 			price: p.price,
 			description: p.description,
 			coverImage: p.images[0] && {

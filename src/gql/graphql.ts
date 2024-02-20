@@ -10788,11 +10788,11 @@ export const ProductsGetListDocument = new TypedDocumentString(`
   products(first: 10) {
     id
     name
-    description
     categories(first: 1) {
       name
     }
-    images(first: 1) {
+    description
+    images {
       url
     }
     price
