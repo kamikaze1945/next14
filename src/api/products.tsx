@@ -49,15 +49,15 @@ const executeGraphql = async <TResult, TVariables>(
 export const getProductList = async (): Promise<
 	ProductItemType[]
 > => {
-	const graphlResponse = await executeGraphql(
+	const graphqlResponse = await executeGraphql(
 		ProductsGetListDocument,
 		{},
 	);
 
-	graphlResponse.products.map((p) => {
+	return graphqlResponse.products.map((p) => {
 		return {
 			id: p.id,
-			name: p.name,
+			title: p.name,
 			category: p.categories[0]?.name || "",
 			price: p.price,
 			description: p.description,
@@ -90,14 +90,9 @@ const productResponseItemToProductItemType = (
 		category: product.category,
 		price: product.price,
 		description: product.description,
-		longDescription: product.longDescription,
 		coverImage: {
 			src: product.image,
 			alt: product.title,
-		},
-		rating: {
-			rate: product.rating?.rate,
-			count: product.rating?.count,
 		},
 	};
 };

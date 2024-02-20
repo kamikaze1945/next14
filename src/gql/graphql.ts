@@ -10788,7 +10788,7 @@ export const ProductsGetListDocument = new TypedDocumentString(`
   products(first: 10) {
     id
     name
-    categories(first: 1) {
+    categories {
       name
     }
     description
