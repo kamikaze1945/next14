@@ -7,6 +7,7 @@
 	],
 	"typescript.preferences.importModuleSpecifier": "non-relative",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"graphql-config.dotEnvPath": "./.env",
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},

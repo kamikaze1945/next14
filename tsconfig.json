@@ -26,7 +26,8 @@
 		"**/*.ts",
 		// Adjust the pattern below to match your project structure
 		"**/*.tsx",
-		".next/types/**/*.ts"
+		".next/types/**/*.ts",
+		".graphqlrc.ts"
 	],
 	"exclude": ["node_modules"]
 }

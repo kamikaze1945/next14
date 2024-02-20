@@ -4,7 +4,7 @@ export const Logo = () => {
 	return (
 		<div className="mt-2 justify-center space-x-4">
 			<Image
-				src="logo.svg"
+				src="/images/logo.svg"
 				alt="Logo"
 				width={40}
 				height={40}

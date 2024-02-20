@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 import { type Route } from "next";
+import { ShoppingCart } from "lucide-react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Logo } from "@/ui/atoms/Logo";
 
@@ -34,11 +35,8 @@ export const Navigation = () => {
 						<span></span>
 					</div>
 
-					<ActiveLink
-						href="/"
-						className="px-4 py-2 text-sm font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 sm:mr-2 lg:mr-0 lg:px-5 lg:py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
-					>
-						Shop
+					<ActiveLink href="/">
+						<ShoppingCart />
 					</ActiveLink>
 					<div
 						className="ml-1 inline-flex cursor-pointer items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

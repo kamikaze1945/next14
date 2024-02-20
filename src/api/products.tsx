@@ -1,23 +1,72 @@
+import {
+	ProductsGetListDocument,
+	type TypedDocumentString,
+} from "@/gql/graphql";
 import type {
 	ProductItemType,
 	ProductResponseItem,
 } from "@/ui/types";
 
-//todo: dodać obsługę
-//const apiUrl = process.env.API_URL;
+type GraphQLResponse<T> =
+	| { data?: undefined; errors: { message: string }[] }
+	| { data: T; errors?: undefined };
 
-export const getProductList = async () => {
-	const response = await fetch(
-		"https://naszsklep-api.vercel.app/api/products",
+const executeGraphql = async <TResult, TVariables>(
+	query: TypedDocumentString<TResult, TVariables>,
+	variables: TVariables,
+): Promise<TResult> => {
+	if (!process.env.GRAPHQL_URL) {
+		throw new Error("GRAPHQL_URL is not defined");
+	}
+
+	const response = await fetch(process.env.GRAPHQL_URL, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			query,
+			variables,
+		}),
+	});
+
+	type GraphQLResponse<T> =
+		| { data?: undefined; errors: { message: string }[] }
+		| { data: T; errors?: undefined };
+
+	const graphqlResponse =
+		(await response.json()) as GraphQLResponse<TResult>;
+
+	if (graphqlResponse.errors) {
+		throw new TypeError(`Graph Error`, {
+			cause: graphqlResponse.errors,
+		});
+	}
+
+	return graphqlResponse.data;
+};
+
+export const getProductList = async (): Promise<
+	ProductItemType[]
+> => {
+	const graphlResponse = await executeGraphql(
+		ProductsGetListDocument,
+		{},
 	);
 
-	const productsResponse =
-		(await response.json()) as ProductResponseItem[];
-	const products = productsResponse.map(
-		productResponseItemToProductItemType,
-	);
-
-	return products;
+	graphlResponse.products.map((p) => {
+		return {
+			id: p.id,
+			name: p.name,
+			categories: p.categories,
+			price: p.price,
+			description: p.description,
+			coverImage: p.images[0] && {
+				src: p.images[0].url,
+				alt: p.name,
+			},
+		};
+	});
 };
 
 export const getProductById = async (
@@ -94,13 +143,6 @@ export const getAllPagesByUrl = async (
 		const productsResponse =
 			(await response.json()) as ProductResponseItem[];
 		const currentPageRecords = productsResponse.length || 0;
-		console.log("currentPageRecords", currentPageRecords);
-		// const products = productsResponse.map(
-		// 	productResponseItemToProductItemType,
-		// );
-
-		// const jsonData = await response.json();
-		// const currentPageRecords = jsonData.length || 0;
 
 		if (currentPageRecords > 0) {
 			totalRecords += currentPageRecords;
