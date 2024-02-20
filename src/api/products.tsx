@@ -57,8 +57,8 @@ export const getProductList = async (): Promise<
 	return graphqlResponse.products.map((p) => {
 		return {
 			id: p.id,
-			title: p.name,
-			category: p.categories[0]?.name || "",
+			name: p.name,
+			//category: p.categories[0]?.name || "",
 			price: p.price,
 			description: p.description,
 			coverImage: p.images[0] && {
@@ -86,13 +86,13 @@ const productResponseItemToProductItemType = (
 ): ProductItemType => {
 	return {
 		id: product.id,
-		title: product.title,
+		name: product.name,
 		category: product.category,
 		price: product.price,
 		description: product.description,
 		coverImage: {
 			src: product.image,
-			alt: product.title,
+			alt: product.name,
 		},
 	};
 };
