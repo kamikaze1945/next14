@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getProductById, getProductList } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
@@ -35,7 +36,13 @@ export default async function SingleProductPage({
 }) {
 	const referral = searchParams.referral?.toString();
 
+	//const product = await getProductById(params.productId);
+
 	const product = await getProductById(params.productId);
+
+	if (!product) {
+		throw notFound();
+	}
 
 	return (
 		<>
