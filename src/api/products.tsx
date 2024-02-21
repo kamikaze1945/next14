@@ -5,11 +5,7 @@ import {
 import type {
 	ProductItemType,
 	ProductResponseItem,
-} from "@/ui/types";
-
-// type GraphQLResponse<T> =
-// 	| { data?: undefined; errors: { message: string }[] }
-// 	| { data: T; errors?: undefined };
+} from "@/consts/products";
 
 const executeGraphql = async <TResult, TVariables>(
 	query: TypedDocumentString<TResult, TVariables>,
@@ -90,7 +86,7 @@ const productResponseItemToProductItemType = (
 		category: product.category,
 		price: product.price,
 		description: product.description,
-		coverImage: {
+		coverImage: product.image && {
 			src: product.image,
 			alt: product.name,
 		},

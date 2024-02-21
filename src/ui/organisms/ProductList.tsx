@@ -1,5 +1,5 @@
 import { ProductItem } from "@/ui/molecules/ProductItem";
-import { type ProductItemType } from "@/ui/types";
+import { type ProductItemType } from "@/consts/products";
 
 export const ProductList = ({
 	products,

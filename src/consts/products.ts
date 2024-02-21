@@ -4,12 +4,12 @@ export type ProductItemType = {
 	description: string;
 	category: string;
 	price: number;
-	coverImage:
+	coverImage?:
 		| {
 				src: string;
 				alt: string;
 		  }
-		| undefined;
+		| "";
 };
 
 export type ProductResponseItem = {
