@@ -1,45 +1,36 @@
 import {
+	ProductsGetByCategorySlugDocument,
 	ProductsGetListDocument,
-	type TypedDocumentString,
 } from "@/gql/graphql";
 import type {
 	ProductItemType,
 	ProductResponseItem,
-} from "@/consts/products";
+} from "@/types/products";
+import { executeGraphql } from "@/api/graphqlApi";
 
-const executeGraphql = async <TResult, TVariables>(
-	query: TypedDocumentString<TResult, TVariables>,
-	variables: TVariables,
-): Promise<TResult> => {
-	if (!process.env.GRAPHQL_URL) {
-		throw new Error("GRAPHQL_URL is not defined");
-	}
+export const getProductsByCategorySlug = async (
+	categorySlug: string,
+): Promise<ProductItemType[]> => {
+	const graphqlResponse = await executeGraphql(
+		ProductsGetByCategorySlugDocument,
+		{ slug: categorySlug },
+	);
 
-	const response = await fetch(process.env.GRAPHQL_URL, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			query,
-			variables,
-		}),
+	const products = graphqlResponse?.categories[0]?.products || [];
+
+	return products.map((p) => {
+		return {
+			id: p.id,
+			name: p.name,
+			description: p.description,
+			category: p.categories[0]?.name || "",
+			price: p.price,
+			coverImage: p.images[0] && {
+				src: p.images[0].url,
+				alt: p.name,
+			},
+		};
 	});
-
-	type GraphQLResponse<T> =
-		| { data?: undefined; errors: { message: string }[] }
-		| { data: T; errors?: undefined };
-
-	const graphqlResponse =
-		(await response.json()) as GraphQLResponse<TResult>;
-
-	if (graphqlResponse.errors) {
-		throw new TypeError(`Graph Error`, {
-			cause: graphqlResponse.errors,
-		});
-	}
-
-	return graphqlResponse.data;
 };
 
 export const getProductList = async (): Promise<

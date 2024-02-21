@@ -1,4 +1,4 @@
-import { type ProductItemType } from "@/consts/products";
+import { type ProductItemType } from "@/types/products";
 import { formatMoney } from "@/utils";
 
 type ProductItemDescriptionProps = {

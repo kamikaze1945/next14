@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import clsx from "clsx";
-import { type Route } from "next";
 import { ShoppingCart } from "lucide-react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Logo } from "@/ui/atoms/Logo";
+import { routes } from "@/const/routes";
 
 export const Navigation = () => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
@@ -35,7 +35,7 @@ export const Navigation = () => {
 						<span></span>
 					</div>
 
-					<ActiveLink href="/">
+					<ActiveLink href="/" title="Store basket">
 						<ShoppingCart />
 					</ActiveLink>
 					<div
@@ -70,19 +70,17 @@ export const Navigation = () => {
 					)}
 				>
 					<ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
-						<li>
+						{routes.map((route) => (
 							<ActiveLink
-								href="/"
-								exact
-								title="Home"
-								className="block lg:bg-transparent lg:p-0 lg:text-purple-700 "
+								exact={route.label === "Home"}
+								key={route.label}
+								href={route.href}
+								title={route.label}
+								activeClassName="block lg:bg-transparent lg:p-0 lg:text-purple-700"
 							>
-								Home
+								{route.label}
 							</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink href={"/products" as Route}>All</ActiveLink>
-						</li>
+						))}
 					</ul>
 				</div>
 			</div>
