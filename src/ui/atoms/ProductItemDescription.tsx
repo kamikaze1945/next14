@@ -6,13 +6,13 @@ type ProductItemDescriptionProps = {
 };
 
 export const ProductItemDescription = ({
-	product: { title, category, price },
+	product: { name, category, price },
 }: ProductItemDescriptionProps) => {
 	return (
 		<div className="justif-between mt-2 flex">
 			<div>
 				<h1 className="text-sm font-semibold text-gray-700">
-					{title}
+					{name}
 				</h1>
 
 				<p className="mt-3 text-sm text-gray-500">
