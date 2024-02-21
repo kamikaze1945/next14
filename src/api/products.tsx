@@ -58,9 +58,9 @@ export const getProductList = async (): Promise<
 		return {
 			id: p.id,
 			name: p.name,
-			//category: p.categories[0]?.name || "",
-			price: p.price,
 			description: p.description,
+			category: p.categories[0]?.name || "",
+			price: p.price,
 			coverImage: p.images[0] && {
 				src: p.images[0].url,
 				alt: p.name,
@@ -90,7 +90,7 @@ const productResponseItemToProductItemType = (
 		category: product.category,
 		price: product.price,
 		description: product.description,
-		coverImage: {
+		coverImage: product.image && {
 			src: product.image,
 			alt: product.name,
 		},
