@@ -26,7 +26,7 @@ export const generateStaticParams = async () => {
 	}));
 };
 
-export default async function SingleProduct({
+export default async function ProductsPage({
 	params,
 	searchParams,
 }: {
