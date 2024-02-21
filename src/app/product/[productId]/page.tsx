@@ -12,7 +12,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
 	return {
-		title: `${product.title}`,
+		title: `${product.name}`,
 		description: `${product.description}`,
 	};
 };
@@ -40,7 +40,9 @@ export default async function SingleProduct({
 	return (
 		<>
 			<article className="max-w-xs" data-referral={referral}>
-				<ProductCoverImage {...product.coverImage} />
+				{product.coverImage && (
+					<ProductCoverImage {...product.coverImage} />
+				)}
 				<ProductItemDescription product={product} />
 			</article>
 			<aside>

@@ -90,7 +90,7 @@ const productResponseItemToProductItemType = (
 		category: product.category,
 		price: product.price,
 		description: product.description,
-		coverImage: product.image && {
+		coverImage: {
 			src: product.image,
 			alt: product.name,
 		},
