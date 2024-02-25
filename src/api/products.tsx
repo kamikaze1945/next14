@@ -11,7 +11,7 @@ import { executeGraphql } from "@/api/graphqlApi";
 
 export const getProductsByCategorySlug = async (
 	categorySlug: string,
-): Promise<ProductItemType[]> => {
+) => {
 	const graphqlResponse = await executeGraphql(
 		ProductsGetByCategorySlugDocument,
 		{ slug: categorySlug },
@@ -19,50 +19,22 @@ export const getProductsByCategorySlug = async (
 
 	const products = graphqlResponse?.categories[0]?.products || [];
 
-	return products.map((p) => {
-		return {
-			id: p.id,
-			name: p.name,
-			description: p.description,
-			category: p.categories[0]?.name || "",
-			price: p.price,
-			coverImage: p.images[0] && {
-				src: p.images[0].url,
-				alt: p.name,
-			},
-		};
-	});
+	return products;
 };
 
-export const getProductList = async (): Promise<
-	ProductItemType[]
-> => {
+export const getProductList = async () => {
 	const graphqlResponse = await executeGraphql(
 		ProductsGetListDocument,
 		{},
 	);
 
-	return graphqlResponse.products.map((p) => {
-		return {
-			id: p.id,
-			name: p.name,
-			description: p.description,
-			category: p.categories[0]?.name || "",
-			price: p.price,
-			coverImage: p.images[0] && {
-				src: p.images[0].url,
-				alt: p.name,
-			},
-		};
-	});
+	return graphqlResponse.products;
 };
 
-export const getProductById = async (
-	productId: string,
-): Promise<ProductItemType> => {
+export const getProductById = async (id: string) => {
 	const graphqlResponse = await executeGraphql(
 		ProductGetByIdDocument,
-		{ id: productId },
+		{ id: id },
 	);
 
 	const product = graphqlResponse?.product;
@@ -70,18 +42,7 @@ export const getProductById = async (
 	if (!product) {
 		throw new Error("Product not found");
 	}
-
-	return {
-		id: product.id,
-		name: product.name,
-		description: product.description,
-		category: product.categories[0]?.name || "",
-		price: product.price,
-		coverImage: product.images[0] && {
-			src: product.images[0].url,
-			alt: product.name,
-		},
-	};
+	return graphqlResponse.product;
 };
 
 const productResponseItemToProductItemType = (

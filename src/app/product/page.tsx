@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getProductById, getProductList } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
@@ -12,8 +13,8 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
 	return {
-		title: `${product.name}`,
-		description: `${product.description}`,
+		title: `${product?.name}`,
+		description: `${product?.description}`,
 	};
 };
 
@@ -37,11 +38,15 @@ export default async function ProductsPage({
 
 	const product = await getProductById(params.productId);
 
+	if (!product) {
+		throw notFound();
+	}
+
 	return (
 		<>
 			<article className="max-w-xs" data-referral={referral}>
-				{product.coverImage && (
-					<ProductCoverImage {...product.coverImage} />
+				{product.images && (
+					<ProductCoverImage src={product.images[0].url} alt="" />
 				)}
 				<ProductItemDescription product={product} />
 			</article>

@@ -12,9 +12,10 @@ export const generateMetadata = async ({
 	params: { productId: string };
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
+
 	return {
-		title: `${product.name}`,
-		description: `${product.description}`,
+		title: `${product?.name} - Next.js Shop`,
+		description: `${product?.description}`,
 	};
 };
 
@@ -47,8 +48,8 @@ export default async function SingleProductPage({
 	return (
 		<>
 			<article className="max-w-xs" data-referral={referral}>
-				{product.coverImage && (
-					<ProductCoverImage {...product.coverImage} />
+				{product.images[0] && (
+					<ProductCoverImage src={product.images[0].url} alt="" />
 				)}
 				<ProductItemDescription product={product} />
 			</article>
