@@ -291,7 +291,7 @@ export type ProductsGetByCollectionSlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCollectionSlugQuery = { collection?: { name: string, slug: string, products: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> }> } | null };
+export type ProductsGetByCollectionSlugQuery = { collection?: { name: string, slug: string, description: string, products: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> }> } | null };
 
 export type ProductsGetByPageQueryVariables = Exact<{
   take: Scalars['Int']['input'];
@@ -419,6 +419,7 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
   collection(slug: $slug) {
     name
     slug
+    description
     products {
       ...ProductsListItem
     }

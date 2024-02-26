@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 
@@ -8,6 +9,26 @@ type CategoryProductPageProps = {
 		page?: string[];
 	};
 };
+
+export const generateMetadata = async ({
+	params,
+}: CategoryProductPageProps): Promise<Metadata> => {
+	const products = await getProductsByCategorySlug(params.category);
+
+	let productName = "Category best product";
+	let productDescription = "Get category best product now!";
+
+	if (products && products.length > 0) {
+		productName = products[0].name;
+		productDescription = products[0].description;
+	}
+
+	return {
+		title: `${productName} - Category`,
+		description: `${productDescription}`,
+	};
+};
+
 export const generateStaticParams = async ({
 	params,
 }: {
