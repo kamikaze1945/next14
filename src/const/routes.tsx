@@ -22,4 +22,8 @@ export const routes: AppRoute[] = [
 		href: "/products/accessories" as Route,
 		label: "Accessories",
 	},
+	{
+		href: "/collections/summer-vibes" as Route,
+		label: "Collections",
+	},
 ];

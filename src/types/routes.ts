@@ -5,7 +5,8 @@ type RouteLabel =
 	| "All"
 	| "T-shirts"
 	| "Hoodies"
-	| "Accessories";
+	| "Accessories"
+	| "Collections";
 
 export type AppRoute = {
 	href: Route;

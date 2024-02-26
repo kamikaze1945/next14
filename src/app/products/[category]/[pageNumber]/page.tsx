@@ -2,6 +2,12 @@ import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 
+type CategoryProductPageProps = {
+	params: {
+		category: string;
+		page?: string[];
+	};
+};
 export const generateStaticParams = async ({
 	params,
 }: {
@@ -16,9 +22,7 @@ export const generateStaticParams = async ({
 
 export default async function CategoryProductPage({
 	params,
-}: {
-	params: { category: string; pageNumber: string };
-}) {
+}: CategoryProductPageProps) {
 	const products = await getProductsByCategorySlug(params.category);
 
 	if (!products) {
