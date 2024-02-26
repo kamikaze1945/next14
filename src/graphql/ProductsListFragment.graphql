@@ -1,5 +1,0 @@
-fragment ProductsListFragment on Query {
-	products(first: 10) {
-		...ProductsListItemFragment
-	}
-}

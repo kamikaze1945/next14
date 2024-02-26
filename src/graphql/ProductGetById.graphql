@@ -1,5 +1,19 @@
 query ProductGetById($id: ID!) {
-	product(where: { id: $id }) {
-		...ProductsListItemFragment
+	product(id: $id) {
+		id
+		name
+		description
+		price
+		images {
+			url
+		}
+		categories {
+			slug
+			name
+		}
+		collections {
+			name
+			slug
+		}
 	}
 }

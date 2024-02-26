@@ -1,15 +1,20 @@
-import { Suspense } from "react";
+//import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProductById, getProductList } from "@/api/products";
+import { Suspense } from "react";
+import {
+	getProductById,
+	getProductsByCollectionSlug,
+} from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
-import { SuggestedProductList } from "@/ui/organisms/SuggestedProductList";
+import { type ProductsListItemFragment } from "@/gql/graphql";
+import { RelatedProductList } from "@/ui/organisms/RelatedProductList";
 
 export const generateMetadata = async ({
 	params,
 }: {
-	params: { productId: string };
+	params: { productId: ProductsListItemFragment["id"] };
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
 
@@ -20,13 +25,16 @@ export const generateMetadata = async ({
 };
 
 //generate static pages when use build production
-export const generateStaticParams = async () => {
-	const products = await getProductList();
+//TODO: generateStaticParams SingleProductPage
+// export const generateStaticParams = async ({
+// 	params,
+// }: {
+// 	params: { productId: ProductsListItemFragment["id"] };
+// }) => {
+// 	const product = await getProductById(params.productId);
 
-	return products.map((product) => ({
-		productId: product.id,
-	}));
-};
+// 	return product;
+// };
 
 export default async function SingleProductPage({
 	params,
@@ -37,11 +45,17 @@ export default async function SingleProductPage({
 }) {
 	const referral = searchParams.referral?.toString();
 
-	//const product = await getProductById(params.productId);
-
 	const product = await getProductById(params.productId);
 
 	if (!product) {
+		throw notFound();
+	}
+
+	const productsCollections =
+		await getProductsByCollectionSlug("summer-vibes");
+	console.log(productsCollections);
+
+	if (!productsCollections) {
 		throw notFound();
 	}
 
@@ -55,7 +69,11 @@ export default async function SingleProductPage({
 			</article>
 			<aside>
 				<Suspense>
-					<SuggestedProductList />
+					<RelatedProductList
+						params={{
+							categorySlug: product?.categories[0]?.slug || undefined,
+						}}
+					/>
 				</Suspense>
 			</aside>
 		</>

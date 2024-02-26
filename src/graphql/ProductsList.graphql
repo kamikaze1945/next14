@@ -1,4 +1,4 @@
-query ProductsGetList {
+fragment ProductsList on Query {
 	products {
 		data {
 			...ProductsListItem

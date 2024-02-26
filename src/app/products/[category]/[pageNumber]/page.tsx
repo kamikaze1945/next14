@@ -26,7 +26,6 @@ export default async function CategoryProductPage({
 	}
 	return (
 		<>
-			<h1>CategoryProductPage</h1>
 			<ProductList products={products || []} />
 		</>
 	);

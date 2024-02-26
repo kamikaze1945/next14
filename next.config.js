@@ -8,7 +8,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "media.graphassets.com",
+				hostname: "static-ourstore.hyperfunctor.com",
 				port: "",
 				pathname: "/**",
 			},
@@ -31,10 +31,14 @@ const nextConfig = {
 				destination: "/products/hoodies/1",
 				permanent: false,
 			},
-
 			{
 				source: "/products/accessories",
 				destination: "/products/accessories/1",
+				permanent: false,
+			},
+			{
+				source: "/collesctions",
+				destination: "/collesctions/super-super-mug",
 				permanent: false,
 			},
 		];

@@ -4,7 +4,7 @@ import "./globals.css";
 import { Header } from "@/ui/organisms/Header";
 import { Footer } from "@/ui/organisms/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
 	title: "Products",

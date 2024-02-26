@@ -1,6 +1,7 @@
 import {
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
+	ProductsGetByCollectionSlugDocument,
 	ProductsGetListDocument,
 } from "@/gql/graphql";
 import type {
@@ -9,26 +10,43 @@ import type {
 } from "@/types/products";
 import { executeGraphql } from "@/api/graphqlApi";
 
-export const getProductsByCategorySlug = async (
-	categorySlug: string,
-) => {
-	const graphqlResponse = await executeGraphql(
-		ProductsGetByCategorySlugDocument,
-		{ slug: categorySlug },
-	);
-
-	const products = graphqlResponse?.categories[0]?.products || [];
-
-	return products;
-};
-
 export const getProductList = async () => {
 	const graphqlResponse = await executeGraphql(
 		ProductsGetListDocument,
 		{},
 	);
+	console.log(graphqlResponse);
 
-	return graphqlResponse.products;
+	return graphqlResponse?.products?.data || [];
+};
+
+export const getProductsByCategorySlug = async (
+	categorySlug: string | undefined,
+) => {
+	let graphqlResponse;
+	if (categorySlug) {
+		graphqlResponse = await executeGraphql(
+			ProductsGetByCategorySlugDocument,
+			{ slug: categorySlug },
+		);
+	}
+
+	const products = graphqlResponse?.category?.products || [];
+
+	return products;
+};
+
+export const getProductsByCollectionSlug = async (
+	collectionSlug: string,
+) => {
+	const graphqlResponse = await executeGraphql(
+		ProductsGetByCollectionSlugDocument,
+		{ slug: collectionSlug },
+	);
+
+	const products = graphqlResponse?.collection?.products || [];
+
+	return products;
 };
 
 export const getProductById = async (id: string) => {
