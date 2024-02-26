@@ -2,6 +2,7 @@ import {
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
+	ProductsGetByPageDocument,
 	ProductsGetListDocument,
 } from "@/gql/graphql";
 import type {
@@ -9,6 +10,21 @@ import type {
 	ProductResponseItem,
 } from "@/types/products";
 import { executeGraphql } from "@/api/graphqlApi";
+
+export const getProductsByPage = async (
+	take: number,
+	skip: number,
+) => {
+	const graphqlResponse = await executeGraphql(
+		ProductsGetByPageDocument,
+		{ take: take || 10, skip: skip || 0 },
+	);
+
+	return {
+		data: graphqlResponse?.products?.data || [],
+		meta: graphqlResponse?.products?.meta,
+	};
+};
 
 export const getProductList = async () => {
 	const graphqlResponse = await executeGraphql(
@@ -114,7 +130,7 @@ export const getPaginationProductList = async (
 	return products;
 };
 
-export const getAllPagesByUrl = async (
+export const getAllPagesByUrl2 = async (
 	href: string,
 	take?: number,
 ) => {

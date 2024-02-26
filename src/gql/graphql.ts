@@ -293,6 +293,14 @@ export type ProductsGetByCollectionSlugQueryVariables = Exact<{
 
 export type ProductsGetByCollectionSlugQuery = { collection?: { name: string, slug: string, products: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> }> } | null };
 
+export type ProductsGetByPageQueryVariables = Exact<{
+  take: Scalars['Int']['input'];
+  skip: Scalars['Int']['input'];
+}>;
+
+
+export type ProductsGetByPageQuery = { products: { data: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> }>, meta: { count: number, total: number } } };
+
 export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -433,6 +441,33 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
     slug
   }
 }`) as unknown as TypedDocumentString<ProductsGetByCollectionSlugQuery, ProductsGetByCollectionSlugQueryVariables>;
+export const ProductsGetByPageDocument = new TypedDocumentString(`
+    query ProductsGetByPage($take: Int!, $skip: Int!) {
+  products(take: $take, skip: $skip) {
+    data {
+      id
+      name
+      description
+      price
+      images {
+        url
+      }
+      categories {
+        slug
+        name
+      }
+      collections {
+        name
+        slug
+      }
+    }
+    meta {
+      count
+      total
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetByPageQuery, ProductsGetByPageQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList {
   products {

@@ -18,11 +18,8 @@ export default async function CollectionsPrdoductPage({
 	}
 
 	return (
-		console.log(params),
-		(
-			<>
-				<ProductList products={products || []} />
-			</>
-		)
+		<>
+			<ProductList products={products || []} />
+		</>
 	);
 }

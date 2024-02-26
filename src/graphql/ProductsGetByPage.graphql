@@ -1,0 +1,25 @@
+query ProductsGetByPage($take: Int!, $skip: Int!) {
+	products(take: $take, skip: $skip) {
+		data {
+			id
+			name
+			description
+			price
+			images {
+				url
+			}
+			categories {
+				slug
+				name
+			}
+			collections {
+				name
+				slug
+			}
+		}
+		meta {
+			count
+			total
+		}
+	}
+}
