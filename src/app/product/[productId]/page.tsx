@@ -25,7 +25,6 @@ export const generateMetadata = async ({
 };
 
 //generate static pages when use build production
-//TODO: generateStaticParams SingleProductPage
 // export const generateStaticParams = async ({
 // 	params,
 // }: {
@@ -33,7 +32,9 @@ export const generateMetadata = async ({
 // }) => {
 // 	const product = await getProductById(params.productId);
 
-// 	return product;
+// 	if (product) {
+// 		return product.id;
+// 	}
 // };
 
 export default async function SingleProductPage({

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
 	description: "Blog example - you can find here all blog pages.",
 };
 
-export default function Test2Page() {
+export default function Test3Page() {
 	return (
 		<>
 			<article>

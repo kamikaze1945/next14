@@ -4,6 +4,7 @@ import {
 	ProductsGetByCollectionSlugDocument,
 	ProductsGetByPageDocument,
 	ProductsGetListDocument,
+	ProductsGetSearchByTermDocument,
 } from "@/gql/graphql";
 import type {
 	ProductItemType,
@@ -31,13 +32,23 @@ export const getProductList = async () => {
 		ProductsGetListDocument,
 		{},
 	);
-	console.log(graphqlResponse);
 
 	return graphqlResponse?.products?.data || [];
 };
 
+export const searchPoductsByTerm = async (searchTearm: string) => {
+	let graphqlResponse;
+	if (searchTearm) {
+		graphqlResponse = await executeGraphql(
+			ProductsGetSearchByTermDocument,
+			{ searchTearm: searchTearm },
+		);
+	}
+	return graphqlResponse?.products?.data || [];
+};
+
 export const getProductsByCategorySlug = async (
-	categorySlug: string | undefined,
+	categorySlug: string,
 ) => {
 	let graphqlResponse;
 	if (categorySlug) {

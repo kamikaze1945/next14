@@ -306,6 +306,13 @@ export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ProductsGetListQuery = { products: { data: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> }> } };
 
+export type ProductsGetSearchByTermQueryVariables = Exact<{
+  searchTearm?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ProductsGetSearchByTermQuery = { products: { data: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> }> } };
+
 export type ProductsListFragment = { products: { data: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> }> } };
 
 export type ProductsListItemFragment = { id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ slug: string, name: string }>, collections: Array<{ name: string, slug: string }> };
@@ -494,3 +501,26 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     slug
   }
 }`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+export const ProductsGetSearchByTermDocument = new TypedDocumentString(`
+    query ProductsGetSearchByTerm($searchTearm: String) {
+  products(search: $searchTearm) {
+    data {
+      id
+      name
+      description
+      price
+      images {
+        url
+      }
+      categories {
+        slug
+        name
+      }
+      collections {
+        name
+        slug
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetSearchByTermQuery, ProductsGetSearchByTermQueryVariables>;

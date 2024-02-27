@@ -1,0 +1,21 @@
+query ProductsGetSearchByTerm($searchTearm: String) {
+	products(search: $searchTearm) {
+		data {
+			id
+			name
+			description
+			price
+			images {
+				url
+			}
+			categories {
+				slug
+				name
+			}
+			collections {
+				name
+				slug
+			}
+		}
+	}
+}

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { type ComponentType } from "react";
+import { Suspense, type ComponentType } from "react";
 
 export default async function StaticPage({
 	params,
@@ -13,7 +13,9 @@ export default async function StaticPage({
 
 	return (
 		<article className="prose prose-lg">
-			<Content />
+			<Suspense fallback="Loading...">
+				<Content />
+			</Suspense>
 		</article>
 	);
 }
