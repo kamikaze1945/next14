@@ -11,18 +11,16 @@ export default function Test2Page({
 	params: { data: string; slug: string };
 }) {
 	return (
-		<>
-			<article>
-				<h1 className="text-4xl font-bold">
-					Blog {data} / {slug}
-				</h1>
-				<div>
-					Lorem ipsum Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Unde dignissimos qui ut hic, illum quod
-					quis excepturi nostrum omnis quae voluptatum in quia
-					voluptate eum possimus animi error iusto veniam.
-				</div>
-			</article>
-		</>
+		<article>
+			<h1 className="text-4xl font-bold">
+				Blog {data} / {slug}
+			</h1>
+			<div>
+				Lorem ipsum Lorem ipsum dolor sit amet, consectetur
+				adipisicing elit. Unde dignissimos qui ut hic, illum quod quis
+				excepturi nostrum omnis quae voluptatum in quia voluptate eum
+				possimus animi error iusto veniam.
+			</div>
+		</article>
 	);
 }

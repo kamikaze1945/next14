@@ -3,6 +3,7 @@ const nextConfig = {
 	experimental: {
 		typedRoutes: true,
 		mdxRs: true,
+		serverActions: true,
 	},
 	images: {
 		remotePatterns: [
@@ -38,7 +39,7 @@ const nextConfig = {
 			},
 			{
 				source: "/collesctions",
-				destination: "/collesctions/super-super-mug",
+				destination: "/collesctions/summer-vibes",
 				permanent: false,
 			},
 		];

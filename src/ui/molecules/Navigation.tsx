@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import clsx from "clsx";
 import { ShoppingCart } from "lucide-react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Logo } from "@/ui/atoms/Logo";
 import { routes } from "@/const/routes";
+import { SearchNavbar } from "@/ui/atoms/SearchNavbar";
 
 export const Navigation = () => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
@@ -27,14 +28,16 @@ export const Navigation = () => {
 	return (
 		<nav className="border-gray-200 bg-white py-2.5 dark:bg-gray-900">
 			<div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4">
-				<ActiveLink href="#" className="flex items-center">
+				<ActiveLink href="/" className="flex items-center">
 					<Logo />
 				</ActiveLink>
 				<div className="flex items-center lg:order-2">
 					<div className="mr-4 mt-2 hidden sm:inline-block">
 						<span></span>
 					</div>
-
+					<Suspense fallback={<div>Loading...</div>}>
+						<SearchNavbar />
+					</Suspense>
 					<ActiveLink href="/" title="Store basket">
 						<ShoppingCart />
 					</ActiveLink>
