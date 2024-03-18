@@ -32,7 +32,6 @@ export const getProductList = async () => {
 		ProductsGetListDocument,
 		{},
 	);
-	console.log(graphqlResponse);
 
 	return graphqlResponse?.products?.data || [];
 };
