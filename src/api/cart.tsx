@@ -67,10 +67,14 @@ export async function createCart(
 		},
 	});
 
-	console.log("createCart:resultData: ", resultData);
+	console.log(
+		"createCart:resultData: ",
+		resultData.cartFindOrCreate.id,
+	);
 	if (resultData === undefined) {
 		throw new Error("Error create new Cart order");
 	}
+	cartId = resultData.cartFindOrCreate.id;
 	cookies().set("cartId", cartId, {
 		httpOnly: true,
 		sameSite: "lax",
