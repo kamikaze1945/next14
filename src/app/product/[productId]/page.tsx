@@ -10,6 +10,7 @@ import { type ProductsListItemFragment } from "@/gql/graphql";
 import { RelatedProductList } from "@/ui/organisms/RelatedProductList";
 import { AddToCartButton } from "@/app/product/[productId]/AddToCartButton";
 import { addToCart, getOrCreateCart } from "@/api/cart";
+import { revalidateTag } from "next/cache";
 
 export const generateMetadata = async ({
 	params,
@@ -53,20 +54,12 @@ export default async function SingleProductPage({
 
 	async function addProductToCartAction(_formData: FormData) {
 		"use server";
-		console.log(_formData);
 
 		const cart = await getOrCreateCart(params.productId);
-		console.log("addProductToCartAction:cart: ", cart);
 		if (cart?.id) {
-			console.log("addProductToCartAction:cookieSave: ", cart.id);
-			cookies().set("cartId", cart.id, {
-				httpOnly: true,
-				sameSite: "lax",
-				//secure: true, // only work on production
-			});
-
 			await addToCart(cart.id, params.productId);
 		}
+		revalidateTag("cart");
 	}
 
 	return (

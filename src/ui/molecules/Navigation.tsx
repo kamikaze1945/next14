@@ -53,9 +53,7 @@ export const Navigation = () => {
 					<div className="ml-4 flex items-center">
 						<ActiveLink href="/cart" className="flex items-center">
 							<ShoppingCart />
-							<span className="none-underline ml-1">
-								{quantityProduct}
-							</span>
+							<span className="ml-1 ">{quantityProduct}</span>
 						</ActiveLink>
 					</div>
 					<div

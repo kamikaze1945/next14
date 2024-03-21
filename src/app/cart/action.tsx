@@ -1,6 +1,6 @@
 "use server";
 
-import { executeGraphql } from "@/api/graphqlApi";
+import { executeGraphQl } from "@/api/graphqlApi";
 import { CartChangeItemQuantityDocument } from "@/gql/graphql";
 
 export const changeProductQuantity = (
@@ -8,9 +8,15 @@ export const changeProductQuantity = (
 	productId: string,
 	quantity: number,
 ) => {
-	return executeGraphql(CartChangeItemQuantityDocument, {
-		id: cartId,
-		productId: productId,
-		quantity: quantity,
+	return executeGraphQl({
+		query: CartChangeItemQuantityDocument,
+		variables: {
+			id: cartId,
+			productId: productId,
+			quantity: quantity,
+		},
+		next: {
+			tags: ["cart"],
+		},
 	});
 };

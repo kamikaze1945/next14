@@ -12,9 +12,6 @@ export const ButtonsChangeProductQuantity = ({
 	productId: string;
 	quantity: number;
 }) => {
-	//const [optimisticQuantity, setOptimisticQuantity] =
-	//	useOptimistic(quantity);
-
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
 		quantity,
 		(_state, newQuantity: number) => newQuantity,
