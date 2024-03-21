@@ -9,6 +9,11 @@ mutation CardCreate($id: ID, $productId: String!, $quantity: Int!) {
 			product {
 				id
 				name
+				price
+				images {
+					alt
+					url
+				}
 			}
 		}
 	}

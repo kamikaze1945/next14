@@ -6,6 +6,11 @@ query CartGetById($id: ID!) {
 			product {
 				id
 				name
+				price
+				images {
+					alt
+					url
+				}
 			}
 		}
 	}

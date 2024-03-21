@@ -12,6 +12,11 @@ mutation CartAddProduct(
 			product {
 				id
 				name
+				price
+				images {
+					alt
+					url
+				}
 			}
 		}
 	}

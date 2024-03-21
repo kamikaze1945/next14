@@ -6,16 +6,10 @@ import { CheckIcon } from "lucide-react";
 import { cookies } from "next/headers";
 import { getProductById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
-import {
-	CardCreateDocument,
-	CartAddProductDocument,
-	CartChangeItemQuantityDocument,
-	CartGetByIdDocument,
-	ProductGetByIdDocument,
-	type ProductsListItemFragment,
-} from "@/gql/graphql";
+import { type ProductsListItemFragment } from "@/gql/graphql";
 import { RelatedProductList } from "@/ui/organisms/RelatedProductList";
-import { executeGraphql } from "@/api/graphqlApi";
+import { AddToCartButton } from "@/app/product/[productId]/AddToCartButton";
+import { addToCart, getOrCreateCart } from "@/api/cart";
 
 export const generateMetadata = async ({
 	params,
@@ -114,12 +108,7 @@ export default async function SingleProductPage({
 								hidden
 								readOnly
 							/>
-							<button
-								type="submit"
-								className="m-3 me-5 w-full transform rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-4 text-center text-sm font-medium text-white transition-transform hover:bg-gradient-to-bl focus:outline-none focus:ring-4  focus:ring-green-200 active:scale-95 dark:focus:ring-green-800"
-							>
-								Add to cart
-							</button>
+							<AddToCartButton />
 						</form>
 					</div>
 				</div>
@@ -135,93 +124,4 @@ export default async function SingleProductPage({
 			</aside>
 		</>
 	);
-}
-
-async function getOrCreateCart(productId: string) {
-	console.log("Start getOrCreateCart");
-	const cartId = cookies().get("cartId")?.value || "";
-
-	console.log("getOrCreateCart:cartId: ", cartId);
-	if (cartId) {
-		const cardData = await getCardById(cartId);
-
-		if (cardData !== undefined && cardData?.cart?.id !== null) {
-			console.log("getOrCreateCart:getCardById: ", cardData);
-			return cardData?.cart;
-		}
-	}
-
-	const cardData = await createCart(cartId, productId, 1);
-	if (cardData?.cartFindOrCreate === null) {
-		throw new Error("Error create new Cart order");
-	}
-
-	return cardData.cartFindOrCreate;
-}
-
-async function getCardById(cartId: string) {
-	return executeGraphql(CartGetByIdDocument, { id: cartId });
-}
-
-function createCart(
-	cartId: string,
-	productId: string,
-	quantity: number = 1,
-) {
-	const resultData = executeGraphql(CardCreateDocument, {
-		id: cartId,
-		productId: productId,
-		quantity: quantity,
-	});
-
-	console.log("createCart:resultData: ", resultData);
-	return resultData;
-}
-
-async function addToCart(
-	cartId: string,
-	productId: string,
-	quantity: number = 1,
-) {
-	const { product } = await executeGraphql(ProductGetByIdDocument, {
-		id: productId,
-	});
-	if (!product) {
-		throw new Error("Product not found");
-	}
-
-	const cardData = await getCardById(cartId);
-
-	if (
-		cardData !== undefined &&
-		cardData?.cart?.id !== null &&
-		cardData?.cart?.items &&
-		cardData?.cart?.items.length > 0
-	) {
-		const cart = cardData.cart;
-
-		for (const item of cart.items) {
-			if (item.product.id === productId) {
-				quantity = item.quantity + 1;
-				console.log(
-					`Product IDssssss: ${item.product.id}, Name: ${item.product.name}, Quantity: ${item.quantity} , item.quantity ${item.quantity}  Quantity: ${quantity}`,
-				);
-				await executeGraphql(CartChangeItemQuantityDocument, {
-					id: cartId,
-					productId: productId,
-					quantity: quantity,
-				});
-
-				return true;
-			}
-		}
-	}
-
-	await executeGraphql(CartAddProductDocument, {
-		id: cartId,
-		productId: productId,
-		quantity: quantity,
-	});
-
-	return true;
 }

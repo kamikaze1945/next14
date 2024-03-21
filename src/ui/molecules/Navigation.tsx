@@ -7,12 +7,24 @@ import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Logo } from "@/ui/atoms/Logo";
 import { routes } from "@/const/routes";
 import { SearchNavbar } from "@/ui/atoms/SearchNavbar";
+import { getCartIdFromCookies } from "@/api/cart";
 
 export const Navigation = () => {
+	const [quantityProduct, setQuantityProduct] = useState(0);
 	const [navIsOpen, setNavIsOpen] = useState(false);
 	const onClickOutside = () => {
 		setNavIsOpen(false);
 	};
+	useEffect(() => {
+		const fetchCart = async () => {
+			const cart = await getCartIdFromCookies();
+			const quantity =
+				cart?.items?.reduce((acc, item) => acc + item.quantity, 0) ||
+				0;
+			setQuantityProduct(quantity);
+		};
+		fetchCart();
+	}, [quantityProduct]);
 
 	useEffect(() => {
 		if (navIsOpen) {
@@ -38,9 +50,14 @@ export const Navigation = () => {
 					<Suspense fallback={<div>Loading...</div>}>
 						<SearchNavbar />
 					</Suspense>
-					<ActiveLink href="/" title="Store basket">
-						<ShoppingCart />
-					</ActiveLink>
+					<div className="ml-4 flex items-center">
+						<ActiveLink href="/cart" className="flex items-center">
+							<ShoppingCart />
+							<span className="none-underline ml-1">
+								{quantityProduct}
+							</span>
+						</ActiveLink>
+					</div>
 					<div
 						className="ml-1 inline-flex cursor-pointer items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
 						aria-controls="mobile-menu-2"

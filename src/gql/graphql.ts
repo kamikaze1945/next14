@@ -281,7 +281,7 @@ export type CartAddProductMutationVariables = Exact<{
 }>;
 
 
-export type CartAddProductMutation = { cartAddItem: { items: Array<{ quantity: number, product: { id: string, name: string } }> } };
+export type CartAddProductMutation = { cartAddItem: { items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ alt: string, url: string }> } }> } };
 
 export type CardCreateMutationVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -290,7 +290,7 @@ export type CardCreateMutationVariables = Exact<{
 }>;
 
 
-export type CardCreateMutation = { cartFindOrCreate: { id: string, items: Array<{ quantity: number, product: { id: string, name: string } }> } };
+export type CardCreateMutation = { cartFindOrCreate: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ alt: string, url: string }> } }> } };
 
 export type CartChangeItemQuantityMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -299,14 +299,14 @@ export type CartChangeItemQuantityMutationVariables = Exact<{
 }>;
 
 
-export type CartChangeItemQuantityMutation = { cartChangeItemQuantity: { id: string, items: Array<{ quantity: number, product: { id: string, name: string } }> } };
+export type CartChangeItemQuantityMutation = { cartChangeItemQuantity: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ alt: string, url: string }> } }> } };
 
 export type CartGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string } }> } | null };
+export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ alt: string, url: string }> } }> } | null };
 
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -422,6 +422,11 @@ export const CartAddProductDocument = new TypedDocumentString(`
       product {
         id
         name
+        price
+        images {
+          alt
+          url
+        }
       }
     }
   }
@@ -439,6 +444,11 @@ export const CardCreateDocument = new TypedDocumentString(`
       product {
         id
         name
+        price
+        images {
+          alt
+          url
+        }
       }
     }
   }
@@ -453,6 +463,11 @@ export const CartChangeItemQuantityDocument = new TypedDocumentString(`
       product {
         id
         name
+        price
+        images {
+          alt
+          url
+        }
       }
     }
   }
@@ -467,6 +482,11 @@ export const CartGetByIdDocument = new TypedDocumentString(`
       product {
         id
         name
+        price
+        images {
+          alt
+          url
+        }
       }
     }
   }
