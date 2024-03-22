@@ -78,7 +78,7 @@ export async function createCart(
 	cookies().set("cartId", cartId, {
 		httpOnly: true,
 		sameSite: "lax",
-		//secure: true, // only work on production
+		secure: true, // only work on production
 	});
 	return resultData;
 }

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getCartIdFromCookies } from "@/api/cart";
 import { formatMoney } from "@/utils";
 import { ButtonsChangeProductQuantity } from "@/app/cart/ButtonsChangeProductQuantity";
+import { RemoveProductButton } from "@/app/cart/RemoveProductButton";
 
 export default async function CartPage() {
 	const cart = await getCartIdFromCookies();
@@ -31,6 +32,7 @@ export default async function CartPage() {
 							<span className="w-full max-w-[200px] text-center">
 								Total
 							</span>
+							<span className="w-full max-w-[100px] text-center"></span>
 						</p>
 					</div>
 
@@ -82,6 +84,10 @@ export default async function CartPage() {
 												item.product.price * item.quantity,
 											)}
 										</h6>
+										<RemoveProductButton
+											cartId={cart.id}
+											productId={item.product.id}
+										/>
 									</div>
 								</div>
 							),
