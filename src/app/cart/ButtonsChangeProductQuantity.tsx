@@ -25,6 +25,7 @@ export const ButtonsChangeProductQuantity = ({
 		<form>
 			<div className="mx-auto flex w-full items-center justify-center">
 				<button
+					data-testid="decrement"
 					className="group flex items-center justify-center rounded-l-full border border-gray-200 px-6 py-[18px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
 					formAction={async () => {
 						setOptimisticQuantity(optimisticQuantity - 1);
@@ -72,6 +73,7 @@ export const ButtonsChangeProductQuantity = ({
 					readOnly
 				/>
 				<button
+					data-testid="increment"
 					className="group flex items-center justify-center rounded-r-full border border-gray-200 px-6 py-[18px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
 					formAction={async () => {
 						setOptimisticQuantity(optimisticQuantity + 1);

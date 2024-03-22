@@ -9,6 +9,7 @@ export const AddToCartButton = () => {
 	console.log(pending);
 	return (
 		<button
+			data-testid="add-to-cart-button"
 			type="submit"
 			aria-disabled={pending}
 			disabled={pending}

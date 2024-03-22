@@ -79,7 +79,10 @@ export default async function CartPage() {
 											quantity={item.quantity}
 										/>
 
-										<h6 className="font-manrope w-full max-w-[176px] text-center text-2xl font-bold leading-9 text-indigo-600">
+										<h6
+											data-testid="quantity"
+											className="font-manrope w-full max-w-[176px] text-center text-2xl font-bold leading-9 text-indigo-600"
+										>
 											{formatMoney(
 												item.product.price * item.quantity,
 											)}

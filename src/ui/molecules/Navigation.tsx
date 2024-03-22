@@ -7,24 +7,12 @@ import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Logo } from "@/ui/atoms/Logo";
 import { routes } from "@/const/routes";
 import { SearchNavbar } from "@/ui/atoms/SearchNavbar";
-import { getCartIdFromCookies } from "@/api/cart";
 
-export const Navigation = () => {
-	const [quantityProduct, setQuantityProduct] = useState(0);
+export const Navigation = ({ quantity }: { quantity: number }) => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
 	const onClickOutside = () => {
 		setNavIsOpen(false);
 	};
-	useEffect(() => {
-		const fetchCart = async () => {
-			const cart = await getCartIdFromCookies();
-			const quantity =
-				cart?.items?.reduce((acc, item) => acc + item.quantity, 0) ||
-				0;
-			setQuantityProduct(quantity);
-		};
-		fetchCart();
-	}, [quantityProduct]);
 
 	useEffect(() => {
 		if (navIsOpen) {
@@ -53,7 +41,7 @@ export const Navigation = () => {
 					<div className="ml-4 flex items-center">
 						<ActiveLink href="/cart" className="flex items-center">
 							<ShoppingCart />
-							<span className="ml-1 ">{quantityProduct}</span>
+							<span className="ml-1">{quantity}</span>
 						</ActiveLink>
 					</div>
 					<div
