@@ -33,6 +33,10 @@ export async function getCartIdFromCookies() {
 			variables: {
 				id: cartId,
 			},
+			cache: "no-store",
+			next: {
+				tags: ["cart"],
+			},
 		});
 
 		if (cartData !== undefined && cartData?.cart?.id !== null) {
@@ -46,6 +50,10 @@ export async function getCardById(cartId: string) {
 		query: CartGetByIdDocument,
 		variables: {
 			id: cartId,
+		},
+		cache: "no-store",
+		next: {
+			tags: ["cart"],
 		},
 	});
 }
@@ -62,18 +70,16 @@ export async function createCart(
 			productId: productId,
 			quantity: quantity,
 		},
+		cache: "no-store",
 		next: {
 			tags: ["cart"],
 		},
 	});
 
-	console.log(
-		"createCart:resultData: ",
-		resultData.cartFindOrCreate.id,
-	);
 	if (resultData === undefined) {
 		throw new Error("Error create new Cart order");
 	}
+
 	cartId = resultData.cartFindOrCreate.id;
 	cookies().set("cartId", cartId, {
 		httpOnly: true,
@@ -93,6 +99,7 @@ export async function addToCart(
 		variables: {
 			id: productId,
 		},
+		cache: "no-store",
 		next: {
 			tags: ["cart"],
 		},
@@ -125,6 +132,7 @@ export async function addToCart(
 						productId: productId,
 						quantity: quantity,
 					},
+					cache: "no-store",
 					next: {
 						tags: ["cart"],
 					},
@@ -142,6 +150,7 @@ export async function addToCart(
 			productId: productId,
 			quantity: quantity,
 		},
+		cache: "no-store",
 		next: {
 			tags: ["cart"],
 		},

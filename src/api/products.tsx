@@ -16,15 +16,15 @@ export const getProductsByPage = async (
 	take: number,
 	skip: number,
 ) => {
-	// const graphqlResponse = await executeGraphql(
-	// 	ProductsGetByPageDocument,
-	// 	{ take: take || 10, skip: skip || 0 },
-	// );
 	const graphqlResponse = await executeGraphQl({
 		query: ProductsGetByPageDocument,
 		variables: {
 			take: take || 10,
 			skip: skip || 0,
+		},
+		next: {
+			tags: ["products"],
+			revalidate: 60 * 60 * 24,
 		},
 	});
 
@@ -47,10 +47,6 @@ export const getProductsByPage = async (
 export const searchPoductsByTerm = async (searchTearm: string) => {
 	let graphqlResponse;
 	if (searchTearm) {
-		// graphqlResponse = await executeGraphql(
-		// 	ProductsGetSearchByTermDocument,
-		// 	{ searchTearm: searchTearm },
-		// );
 		graphqlResponse = await executeGraphQl({
 			query: ProductsGetSearchByTermDocument,
 			variables: {
@@ -66,10 +62,6 @@ export const getProductsByCategorySlug = async (
 ) => {
 	let graphqlResponse;
 	if (categorySlug) {
-		// graphqlResponse = await executeGraphql(
-		// 	ProductsGetByCategorySlugDocument,
-		// 	{ slug: categorySlug },
-		// );
 		graphqlResponse = await executeGraphQl({
 			query: ProductsGetByCategorySlugDocument,
 			variables: {
@@ -86,10 +78,6 @@ export const getProductsByCategorySlug = async (
 export const getProductsByCollectionSlug = async (
 	collectionSlug: string,
 ) => {
-	// const graphqlResponse = await executeGraphql(
-	// 	ProductsGetByCollectionSlugDocument,
-	// 	{ slug: collectionSlug },
-	// );
 	const graphqlResponse = await executeGraphQl({
 		query: ProductsGetByCollectionSlugDocument,
 		variables: {
@@ -103,14 +91,13 @@ export const getProductsByCollectionSlug = async (
 };
 
 export const getProductById = async (id: string) => {
-	// const graphqlResponse = await executeGraphql(
-	// 	ProductGetByIdDocument,
-	// 	{ id: id },
-	// );
 	const graphqlResponse = await executeGraphQl({
 		query: ProductGetByIdDocument,
 		variables: {
 			id: id,
+		},
+		next: {
+			revalidate: 1,
 		},
 	});
 
