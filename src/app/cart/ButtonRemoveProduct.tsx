@@ -4,7 +4,7 @@ import { removeItemProduct } from "@/app/cart/action";
 import { startTransition, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-export const RemoveProductButton = ({
+export const ButtonRemoveProduct = ({
 	cartId,
 	productId,
 }: {

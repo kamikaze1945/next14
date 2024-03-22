@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getCartIdFromCookies } from "@/api/cart";
 import { formatMoney } from "@/utils";
 import { ButtonsChangeProductQuantity } from "@/app/cart/ButtonsChangeProductQuantity";
-import { RemoveProductButton } from "@/app/cart/RemoveProductButton";
+import { ButtonRemoveProduct } from "@/app/cart/ButtonRemoveProduct";
 
 export default async function CartPage() {
 	const cart = await getCartIdFromCookies();
@@ -84,7 +84,7 @@ export default async function CartPage() {
 												item.product.price * item.quantity,
 											)}
 										</h6>
-										<RemoveProductButton
+										<ButtonRemoveProduct
 											cartId={cart.id}
 											productId={item.product.id}
 										/>
