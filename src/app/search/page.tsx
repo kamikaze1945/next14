@@ -16,11 +16,25 @@ export default async function SearchPage({
 
 	return (
 		<Suspense>
-			{products && <ProductList products={products || []} />}
-			{!products && (
-				<div className="justify-center text-center">
-					No products found
+			{products === undefined || products?.length === 0 ? (
+				<div className="flex h-[60vh] flex-col items-center justify-center">
+					<h2 className="text-2xl font-semibold leading-8 text-gray-500">
+						Products not found
+					</h2>
+					<div className="flex items-center">
+						<p>
+							<a
+								href="/products"
+								title="Continue Shopping"
+								className="underline"
+							>
+								Continue Shopping
+							</a>
+						</p>
+					</div>
 				</div>
+			) : (
+				<ProductList products={products || []}></ProductList>
 			)}
 		</Suspense>
 	);
