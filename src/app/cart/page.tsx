@@ -4,13 +4,17 @@ import { getCartIdFromCookies } from "@/api/cart";
 import { formatMoney } from "@/utils";
 import { ButtonsChangeProductQuantity } from "@/app/cart/ButtonsChangeProductQuantity";
 import { ButtonRemoveProduct } from "@/app/cart/ButtonRemoveProduct";
+import Stripe from "stripe";
+import { cookies } from "next/headers";
+import { handlePaymentAction } from "@/app/cart/action";
 
 export default async function CartPage() {
 	const cart = await getCartIdFromCookies();
-
+	console.log("stripe", process.env.STRIPE_SECRET_KEY);
 	if (!cart) {
 		redirect("/products");
 	}
+
 	return (
 		<div>
 			<section className="relative">
@@ -143,25 +147,27 @@ export default async function CartPage() {
 								/>
 							</svg>
 						</button>
-						<button className="flex w-full max-w-[280px] items-center justify-center rounded-full bg-indigo-600 py-4 text-center text-lg font-semibold text-white transition-all duration-500 hover:bg-indigo-700">
-							Continue to Payment
-							<svg
-								className="ml-2"
-								xmlns="http://www.w3.org/2000/svg"
-								width="23"
-								height="22"
-								viewBox="0 0 23 22"
-								fill="none"
-							>
-								<path
-									d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998"
-									stroke="white"
-									strokeWidth="1.6"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</svg>
-						</button>
+						<form action={handlePaymentAction}>
+							<button className="flex w-full max-w-[280px] items-center justify-center rounded-full bg-indigo-600 py-4 text-center text-lg font-semibold text-white transition-all duration-500 hover:bg-indigo-700">
+								Continue to Payment
+								<svg
+									className="ml-2"
+									xmlns="http://www.w3.org/2000/svg"
+									width="23"
+									height="22"
+									viewBox="0 0 23 22"
+									fill="none"
+								>
+									<path
+										d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998"
+										stroke="white"
+										strokeWidth="1.6"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+							</button>
+						</form>
 					</div>
 				</div>
 			</section>

@@ -26,7 +26,7 @@ export const ButtonsChangeProductQuantity = ({
 			<div className="mx-auto flex w-full items-center justify-center">
 				<button
 					data-testid="decrement"
-					className="group flex items-center justify-center rounded-l-full border border-gray-200 px-6 py-[18px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
+					className="group flex items-center justify-center rounded-l-full border border-gray-200 px-4 py-[16px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
 					formAction={async () => {
 						setOptimisticQuantity(optimisticQuantity - 1);
 						await changeProductQuantity(
@@ -68,13 +68,13 @@ export const ButtonsChangeProductQuantity = ({
 				</button>
 				<input
 					type="text"
-					className="w-full min-w-[80px] max-w-[118px] border-y border-gray-200 bg-transparent py-[15px] text-center text-lg font-semibold text-gray-900 outline-none placeholder:text-gray-900"
+					className="w-full min-w-[75px] max-w-[118px] border-y border-gray-200 bg-transparent py-[13px] text-center text-lg font-semibold text-gray-900 outline-none placeholder:text-gray-900"
 					placeholder={optimisticQuantity.toString()}
 					readOnly
 				/>
 				<button
 					data-testid="increment"
-					className="group flex items-center justify-center rounded-r-full border border-gray-200 px-6 py-[18px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
+					className="group flex items-center justify-center rounded-r-full border border-gray-200 px-4 py-[16px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
 					formAction={async () => {
 						setOptimisticQuantity(optimisticQuantity + 1);
 						await changeProductQuantity(
