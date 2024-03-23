@@ -5,6 +5,8 @@ import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
 	title: "All products",
 	description: "Products list - you can find here all products.",
@@ -16,12 +18,12 @@ type ProductPageProps = {
 	};
 };
 
-// export const generateStaticParams = async () => {
-// 	const products = await getProductsByPage(3, 0);
-// 	return products?.data?.map((product) => ({
-// 		params: { productId: product.id },
-// 	}));
-// };
+export const generateStaticParams = async () => {
+	const products = await getProductsByPage(3, 0);
+	return products?.data?.map((product) => ({
+		params: { productId: product.id },
+	}));
+};
 
 export default async function ProductsPage({
 	params,

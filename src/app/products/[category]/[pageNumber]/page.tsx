@@ -4,6 +4,8 @@ import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 type CategoryProductPageProps = {
 	params: {
 		category: string;
@@ -30,17 +32,17 @@ export const generateMetadata = async ({
 	};
 };
 
-// export const generateStaticParams = async ({
-// 	params,
-// }: {
-// 	params: { category: string };
-// }) => {
-// 	if (params.category === "t-shirts") {
-// 		return [{ pageNumber: "1" }, { pageNumber: "2" }];
-// 	} else {
-// 		return [{ pageNumber: "1" }];
-// 	}
-// };
+export const generateStaticParams = async ({
+	params,
+}: {
+	params: { category: string };
+}) => {
+	if (params.category === "t-shirts") {
+		return [{ pageNumber: "1" }, { pageNumber: "2" }];
+	} else {
+		return [{ pageNumber: "1" }];
+	}
+};
 
 export default async function CategoryProductPage({
 	params,

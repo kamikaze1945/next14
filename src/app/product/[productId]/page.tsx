@@ -11,6 +11,8 @@ import { AddToCartButton } from "@/app/product/[productId]/AddToCartButton";
 import { addToCart, getOrCreateCart } from "@/api/cart";
 import { revalidateTag } from "next/cache";
 
+export const dynamic = "force-dynamic";
+
 export const generateMetadata = async ({
 	params,
 }: {
