@@ -127,7 +127,7 @@ export default async function CartPage() {
 						</div>
 					</div>
 					<div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-						<button className="flex w-full max-w-[280px] items-center  justify-center rounded-full bg-indigo-50 py-4 transition-all duration-500 hover:bg-indigo-100">
+						{/* <button className="flex w-full max-w-[280px] items-center  justify-center rounded-full bg-indigo-50 py-4 transition-all duration-500 hover:bg-indigo-100">
 							<span className="px-2 text-lg font-semibold leading-8 text-indigo-600">
 								Add Coupon Code
 							</span>
@@ -146,9 +146,9 @@ export default async function CartPage() {
 									strokeLinejoin="round"
 								/>
 							</svg>
-						</button>
+						</button> */}
 						<form action={handlePaymentAction}>
-							<button className="flex w-full max-w-[280px] items-center justify-center rounded-full bg-indigo-600 py-4 text-center text-lg font-semibold text-white transition-all duration-500 hover:bg-indigo-700">
+							<button className="flex w-full max-w-[280px] items-center justify-center rounded-full bg-indigo-600 p-4 text-center text-lg font-semibold text-white transition-all duration-500 hover:bg-indigo-700">
 								Continue to Payment
 								<svg
 									className="ml-2"

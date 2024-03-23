@@ -114,28 +114,8 @@ export default async function ModalCart() {
 						</div>
 
 						<div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-							<button className="flex w-full max-w-[280px] items-center  justify-center rounded-full bg-indigo-50 py-4 transition-all duration-500 hover:bg-indigo-100">
-								<span className="px-2 text-lg font-semibold leading-8 text-indigo-600">
-									Add Coupon Code
-								</span>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="22"
-									height="22"
-									viewBox="0 0 22 22"
-									fill="none"
-								>
-									<path
-										d="M8.25324 5.49609L13.7535 10.9963L8.25 16.4998"
-										stroke="#4F46E5"
-										strokeWidth="1.6"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-								</svg>
-							</button>
 							<form action={handlePaymentAction}>
-								<button className="flex w-full max-w-[280px] items-center justify-center rounded-full bg-indigo-600 py-4 text-center text-lg font-semibold text-white transition-all duration-500 hover:bg-indigo-700">
+								<button className="m-2 flex w-full max-w-[280px] items-center justify-center rounded-full bg-indigo-600 p-4 text-center text-lg font-semibold text-white transition-all duration-500 hover:bg-indigo-700">
 									Continue to Payment
 									<svg
 										className="ml-2"
