@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getProductsByPage } from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "All products",
@@ -36,11 +37,13 @@ export default async function ProductsPage({
 
 	return (
 		<>
-			<ProductList products={products?.data || []} />
-			<Pagination
-				pageNumber={currentPage}
-				totalPages={Math.ceil(products?.meta?.total / take) || 0}
-			/>
+			<Suspense>
+				<ProductList products={products?.data || []} />
+				<Pagination
+					pageNumber={currentPage}
+					totalPages={Math.ceil(products?.meta?.total / take) || 0}
+				/>
+			</Suspense>
 		</>
 	);
 }

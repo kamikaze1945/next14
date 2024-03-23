@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
+import { Suspense } from "react";
 
 type CategoryProductPageProps = {
 	params: {
@@ -51,7 +52,9 @@ export default async function CategoryProductPage({
 	}
 	return (
 		<>
-			<ProductList products={products || []} />
+			<Suspense>
+				<ProductList products={products || []} />
+			</Suspense>
 		</>
 	);
 }

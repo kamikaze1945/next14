@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { getProductsByCollectionSlug } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { Suspense } from "react";
 
 type CollectionsPrdoductPageProps = {
 	params: {
@@ -46,7 +47,9 @@ export default async function CollectionsPrdoductPage({
 
 	return (
 		<>
-			<ProductList products={products || []} />
+			<Suspense>
+				<ProductList products={products || []} />
+			</Suspense>
 		</>
 	);
 }
