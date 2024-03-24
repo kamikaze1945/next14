@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 type CategoryProductPageProps = {
 	params: {
 		category: string;
-		page?: number;
+		pageNumber?: number;
 	};
 };
 
@@ -37,7 +37,7 @@ export const generateMetadata = async ({
 export const generateStaticParams = async ({
 	params,
 }: {
-	params: { category: string };
+	params: { category: string; page: string };
 }) => {
 	if (params.category === "t-shirts") {
 		return [{ pageNumber: "1" }, { pageNumber: "2" }];
@@ -51,19 +51,31 @@ export default async function CategoryProductPage({
 }: CategoryProductPageProps) {
 	const products = await getProductsByCategorySlug(params.category);
 
-	console.log("categoryyyyy list: ", products);
+	console.log("categoryyyyy  page number browser: ", params);
+	console.log("categoryyyyy all products: ", products);
 	if (!products) {
 		throw notFound();
 	}
 
-	const currentPage = params?.page || 1;
+	const currentPage = params?.pageNumber || 1;
+	console.log("currentPage", currentPage);
 	const take = 4;
-	const offset = (currentPage - 1) * take || 0;
+	const offset = (currentPage - 1) * take;
 	const totalPages = Math.ceil(products.length / take);
 	const productsCountOnPage = products.slice(
-		(currentPage - 1) * take,
+		offset,
 		currentPage * take,
 	);
+
+	if (currentPage == 1) {
+		console.log(productsCountOnPage);
+		console.log(offset, currentPage * take);
+		console.log("1111categoryyyyy  page number browser: ", params);
+	} else {
+		console.log(productsCountOnPage);
+		console.log(offset, currentPage * take);
+		console.log("2222categoryyyyy  page number browser: ", params);
+	}
 
 	const pageTitle =
 		`Category - ${products[0]?.categories[0]?.name}` || `Category`;
