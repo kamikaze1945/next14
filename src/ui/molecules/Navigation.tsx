@@ -28,9 +28,10 @@ export const Navigation = ({ quantity }: { quantity: number }) => {
 	return (
 		<nav className="border-gray-200 bg-white py-2.5 dark:bg-gray-900">
 			<div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4">
-				<ActiveLink href="/" className="flex items-center">
-					<Logo />
-				</ActiveLink>
+				{/* <ActiveLink href="/" className="flex items-center">
+					
+				</ActiveLink> */}
+				<Logo />
 				<div className="flex items-center lg:order-2">
 					<div className="mr-4 mt-2 hidden sm:inline-block">
 						<span></span>
