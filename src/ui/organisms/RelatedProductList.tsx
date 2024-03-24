@@ -1,5 +1,5 @@
 import { getProductsByCategorySlug } from "@/api/products";
-import { ProductList } from "@/ui/organisms/ProductList";
+import { RelatedProductItems } from "@/ui/organisms/RelatedProductItems";
 import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +27,7 @@ export const RelatedProductList = async ({
 	return (
 		<Suspense>
 			<div data-testid="related-products" aria-busy="true">
-				<ProductList products={products?.slice(-4)} />
+				<RelatedProductItems products={products?.slice(-4)} />
 			</div>
 		</Suspense>
 	);
