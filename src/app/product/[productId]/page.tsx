@@ -108,7 +108,7 @@ export default async function SingleProductPage({
 				</div>
 			</article>
 			<aside>
-				<Suspense>
+				<Suspense aria-busy="true">
 					<RelatedProductList
 						params={{
 							categorySlug: product?.categories[0]?.slug || undefined,
