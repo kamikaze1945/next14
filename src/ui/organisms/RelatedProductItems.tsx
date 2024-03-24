@@ -10,7 +10,7 @@ export const RelatedProductItems = ({
 	products: ProductsListItemFragment[];
 }) => {
 	return (
-		<Suspense>
+		<Suspense aria-busy="true">
 			<section>
 				<ul
 					data-testid="products-list"
@@ -26,7 +26,6 @@ export const RelatedProductItems = ({
 											alt=""
 										/>
 									)}
-
 									<div className="justif-between mt-2 flex">
 										<div>
 											<h2 className="text-sm font-semibold text-gray-700">
