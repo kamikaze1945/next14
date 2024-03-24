@@ -1,24 +1,42 @@
+import { getProductsByPage } from "@/api/products";
+import { ProductList } from "@/ui/organisms/ProductList";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
-	title: "Home",
-	description: "Home page - welcome",
+	title: "Top products",
+	description: "Products list - you can find here all products.",
 };
 
-export default function Home() {
+type ProductPageProps = {
+	params: {
+		page?: number;
+	};
+};
+
+export const generateStaticParams = async () => {
+	const products = await getProductsByPage(3, 0);
+	return products?.data?.map((product) => ({
+		params: { productId: product.id },
+	}));
+};
+
+export default async function Home({ params }: ProductPageProps) {
+	const currentPage = params?.page || 1;
+	const take = 10;
+	const offset = (currentPage - 1) * take || 0;
+	const products = await getProductsByPage(take, offset);
+
+	if (!products) {
+		throw notFound();
+	}
 	return (
 		<>
 			<Suspense>
-				<article>
-					<h1 className="text-4xl font-bold">Home</h1>
-					<div>
-						Lorem ipsum Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit. Unde dignissimos qui ut hic, illum quod
-						quis excepturi nostrum omnis quae voluptatum in quia
-						voluptate eum possimus animi error iusto veniam.
-					</div>
-				</article>
+				<ProductList products={products?.data || []} />
 			</Suspense>
 		</>
 	);
