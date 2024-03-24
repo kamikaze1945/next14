@@ -69,45 +69,47 @@ export default async function SingleProductPage({
 				className="mx-auto grid max-w-7xl py-8"
 				data-referral={referral}
 			>
-				<div className="grid grid-cols-2 gap-4">
-					{product.images[0] && (
-						<ProductCoverImage src={product.images[0].url} alt="" />
-					)}
+				<Suspense aria-busy="true">
+					<div className="grid grid-cols-2 gap-4">
+						{product.images[0] && (
+							<ProductCoverImage src={product.images[0].url} alt="" />
+						)}
 
-					<div className="px-6">
-						<h1 className="flex-auto text-3xl font-bold tracking-tighter text-black">
-							{product?.name}
-						</h1>
-						<div className="mt-4 flex items-center">
-							${product?.price}
+						<div className="px-6">
+							<h1 className="flex-auto text-3xl font-bold tracking-tighter text-black">
+								{product?.name}
+							</h1>
+							<div className="mt-4 flex items-center">
+								${product?.price}
+							</div>
+							{/* <ProductItemDescription product={product} /> */}
+							<div className="mt-4 space-y-6">
+								{product?.description}
+							</div>
+							<div className="mt-4 flex items-center">
+								<CheckIcon
+									className="mr-1 h-4 w-4 text-green-500"
+									aria-hidden="true"
+								/>
+								<p className="m-2 text-sm font-semibold text-slate-500">
+									In stock
+								</p>
+							</div>
+							<form action={addProductToCartAction}>
+								<input
+									type="text"
+									name="productId"
+									value={product.id}
+									hidden
+									readOnly
+								/>
+								<AddToCartButton />
+							</form>
 						</div>
-						{/* <ProductItemDescription product={product} /> */}
-						<div className="mt-4 space-y-6">
-							{product?.description}
-						</div>
-						<div className="mt-4 flex items-center">
-							<CheckIcon
-								className="mr-1 h-4 w-4 text-green-500"
-								aria-hidden="true"
-							/>
-							<p className="m-2 text-sm font-semibold text-slate-500">
-								In stock
-							</p>
-						</div>
-						<form action={addProductToCartAction}>
-							<input
-								type="text"
-								name="productId"
-								value={product.id}
-								hidden
-								readOnly
-							/>
-							<AddToCartButton />
-						</form>
 					</div>
-				</div>
+				</Suspense>
 			</article>
-			<aside>
+			{/* <aside>
 				<Suspense aria-busy="true">
 					<RelatedProductList
 						params={{
@@ -115,7 +117,7 @@ export default async function SingleProductPage({
 						}}
 					/>
 				</Suspense>
-			</aside>
+			</aside> */}
 		</>
 	);
 }

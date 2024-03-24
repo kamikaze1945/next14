@@ -13,6 +13,7 @@ export const RelatedProductList = async ({
 	if (!params.categorySlug) {
 		return null;
 	}
+
 	const products = await getProductsByCategorySlug(
 		params.categorySlug,
 	);
