@@ -3,6 +3,7 @@ import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 import { Suspense } from "react";
+import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export const dynamic = "force-dynamic";
 
@@ -52,9 +53,14 @@ export default async function CategoryProductPage({
 	if (!products) {
 		throw notFound();
 	}
+
+	const pageTitle =
+		`Category - ${products[0]?.categories[0]?.name}` || `Category`;
+
 	return (
 		<>
 			<Suspense>
+				<PageTitle param={pageTitle} />
 				<ProductList products={products || []} />
 			</Suspense>
 		</>

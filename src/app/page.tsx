@@ -1,4 +1,5 @@
 import { getProductsByPage } from "@/api/products";
+import { PageTitle } from "@/ui/atoms/PageTitle";
 import { ProductList } from "@/ui/organisms/ProductList";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -26,16 +27,19 @@ export const generateStaticParams = async () => {
 
 export default async function Home({ params }: ProductPageProps) {
 	const currentPage = params?.page || 1;
-	const take = 10;
-	const offset = (currentPage - 1) * take || 0;
+	const take = 4;
+	const offset = (currentPage - 1) * take || 3;
 	const products = await getProductsByPage(take, offset);
 
 	if (!products) {
 		throw notFound();
 	}
+	const pageTitle = `Top products`;
+
 	return (
 		<>
 			<Suspense>
+				<PageTitle param={pageTitle} />
 				<ProductList products={products?.data || []} />
 			</Suspense>
 		</>

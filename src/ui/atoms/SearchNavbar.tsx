@@ -11,7 +11,6 @@ export const SearchNavbar = () => {
 	const router = useRouter();
 
 	const handleSearch = (searchTearms: string) => {
-		console.log(searchTearms);
 		const params = new URLSearchParams(searchParams);
 		if (searchTearms) {
 			params.set("query", searchTearms);

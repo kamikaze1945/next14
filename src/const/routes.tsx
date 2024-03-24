@@ -11,19 +11,19 @@ export const routes: AppRoute[] = [
 		label: "All",
 	},
 	{
-		href: "/categories/t-shirts/1" as Route,
-		label: "T-shirts",
-	},
-	{
 		href: "/products/hoodies" as Route,
 		label: "Hoodies",
 	},
 	{
-		href: "/products/accessories" as Route,
-		label: "Accessories",
-	},
-	{
 		href: "/collections/summer-vibes" as Route,
 		label: "Collections",
+	},
+	{
+		href: "/categories/t-shirts/1" as Route,
+		label: "T-shirts",
+	},
+	{
+		href: "/categories/accessories/1" as Route,
+		label: "Accessories",
 	},
 ];

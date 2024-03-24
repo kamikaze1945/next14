@@ -5,6 +5,7 @@ import Image from "next/image";
 import { formatMoney } from "@/utils";
 import { ButtonsChangeProductQuantity } from "@/app/cart/ButtonsChangeProductQuantity";
 import { ButtonRemoveProduct } from "@/app/cart/ButtonRemoveProduct";
+import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export default async function ModalCart() {
 	const cart = await getCartIdFromCookies();
@@ -33,9 +34,7 @@ export default async function ModalCart() {
 						</div>
 					) : (
 						<div className="mx-auto w-full max-w-sm px-4 md:px-5">
-							<h2 className="title font-manrope mb-8 text-center text-4xl font-bold leading-10 text-black">
-								Shopping Cart
-							</h2>
+							<PageTitle param="Shopping Cart" />
 							<div className="hidden grid-cols-2 py-6 lg:grid">
 								<div className="text-xl font-normal leading-8 text-gray-500">
 									Product

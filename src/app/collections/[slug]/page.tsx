@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { getProductsByCollectionSlug } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
+import React from "react";
+import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +27,7 @@ export const generateMetadata = async ({
 	}
 
 	return {
-		title: `${productName} - Collectios`,
+		title: `Collections`,
 		description: `${productDescription}`,
 	};
 };
@@ -46,8 +48,10 @@ export default async function CollectionsPrdoductPage({
 		throw notFound();
 	}
 
+	const pageTitle = `Collections`;
 	return (
 		<>
+			<PageTitle param={pageTitle} />
 			<ProductList products={products || []} />
 		</>
 	);

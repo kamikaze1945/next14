@@ -1,11 +1,14 @@
 import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
+//type PaginationProps = {
 type PaginationProps = {
+	hrefValue: Route<string>;
 	pageNumber: number;
 	totalPages: number;
 };
 export const PaginationAllPages = ({
+	hrefValue,
 	pageNumber,
 	totalPages,
 }: PaginationProps) => {
@@ -68,9 +71,14 @@ export const PaginationAllPages = ({
 							key={i}
 							href={
 								i === 0
-									? ("/products" as Route)
-									: `/products/${i + 1}`
+									? (`${hrefValue}/1` as Route)
+									: (`${hrefValue}/${i + 1}` as Route)
 							}
+							// href={
+							// 	i === 0
+							// 		? (`/products` as Route)
+							// 		: `/products/${i + 1}`
+							// }
 							title={
 								i === pageNumber - 1
 									? `Current page ${pageNumber}`

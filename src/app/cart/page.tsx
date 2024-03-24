@@ -7,6 +7,7 @@ import { ButtonRemoveProduct } from "@/app/cart/ButtonRemoveProduct";
 import Stripe from "stripe";
 import { cookies } from "next/headers";
 import { handlePaymentAction } from "@/app/cart/action";
+import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export default async function CartPage() {
 	const cart = await getCartIdFromCookies();
@@ -37,6 +38,7 @@ export default async function CartPage() {
 			) : (
 				<section className="relative">
 					<div className="lg-6 mx-auto w-full max-w-7xl px-4 md:px-5">
+						<PageTitle param="Shopping Cart" />
 						<h2 className="title font-manrope mb-8 text-center text-4xl font-bold leading-10 text-black"></h2>
 						<div className="hidden grid-cols-2 py-6 lg:grid">
 							<div className="text-xl font-normal leading-8 text-gray-500">
@@ -99,10 +101,7 @@ export default async function CartPage() {
 												quantity={item.quantity}
 											/>
 
-											<h6
-												data-testid="quantity"
-												className="font-manrope w-full max-w-[176px] text-center text-2xl font-bold leading-9 text-indigo-600"
-											>
+											<h6 className="font-manrope w-full max-w-[176px] text-center text-2xl font-bold leading-9 text-indigo-600">
 												{formatMoney(
 													item.product.price * item.quantity,
 												)}

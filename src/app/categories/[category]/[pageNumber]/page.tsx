@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
-import { type Metadata } from "next";
+import { type Metadata, Route } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 import { Suspense } from "react";
 import { Pagination } from "@/ui/molecules/Pagination";
+import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +29,7 @@ export const generateMetadata = async ({
 	}
 
 	return {
-		title: `${productName} - Category`,
+		title: `${products[0]?.categories[0]?.name}`,
 		description: `${productDescription}`,
 	};
 };
@@ -48,22 +49,35 @@ export const generateStaticParams = async ({
 export default async function CategoryProductPage({
 	params,
 }: CategoryProductPageProps) {
-	const currentPage = params?.page || 1;
-	const take = 10;
-	const offset = (currentPage - 1) * take || 0;
 	const products = await getProductsByCategorySlug(params.category);
 
+	console.log("categoryyyyy list: ", products);
 	if (!products) {
 		throw notFound();
 	}
+
+	const currentPage = params?.page || 1;
+	const take = 4;
+	const offset = (currentPage - 1) * take || 0;
+	const totalPages = Math.ceil(products.length / take);
+	const productsCountOnPage = products.slice(
+		(currentPage - 1) * take,
+		currentPage * take,
+	);
+
+	const pageTitle =
+		`Category - ${products[0]?.categories[0]?.name}` || `Category`;
+
 	return (
 		<>
-			<Suspense>
-				<ProductList products={products || []} />
-				{/* <Pagination
+			<Suspense aria-busy="true">
+				<PageTitle param={pageTitle} />
+				<ProductList products={productsCountOnPage || []} />
+				<Pagination
+					href={`/categories/${params.category}` as Route}
 					pageNumber={currentPage}
-					totalPages={Math.ceil(products?.meta?.total / take) || 0}
-				/> */}
+					totalPages={totalPages || 0}
+				/>
 			</Suspense>
 		</>
 	);

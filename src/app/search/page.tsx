@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { searchPoductsByTerm } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export default async function SearchPage({
 	searchParams,
@@ -13,6 +14,7 @@ export default async function SearchPage({
 			searchParams?.query as string,
 		);
 	}
+	const pageTitle = `Search products - ${searchParams.query}`;
 
 	return (
 		<Suspense>
@@ -34,7 +36,10 @@ export default async function SearchPage({
 					</div>
 				</div>
 			) : (
-				<ProductList products={products || []}></ProductList>
+				<>
+					<PageTitle param={pageTitle} />
+					<ProductList products={products || []}></ProductList>
+				</>
 			)}
 		</Suspense>
 	);

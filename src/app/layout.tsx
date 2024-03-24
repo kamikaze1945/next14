@@ -22,7 +22,7 @@ export default function RootLayout({
 		<html lang="pl">
 			<body className={inter.className}>
 				<Header />
-				<main className="max-w-dp-12 sm:max-w-wxl mx-auto sm:py-16 md:max-w-4xl lg:max-w-7xl">
+				<main className="max-w-dp-12 sm:max-w-wxl mx-auto sm:py-5 md:max-w-4xl lg:max-w-7xl">
 					{children}
 				</main>
 				<Footer />

@@ -1,11 +1,15 @@
 import { PaginationAllPages } from "@/ui/molecules/PaginationAllPages";
+import { Route } from "next";
 
+//type PaginationProps = {
 type PaginationProps = {
+	href: Route<string>;
 	pageNumber: number;
 	totalPages: number;
 	typePagination?: string;
 };
 export const Pagination = ({
+	href,
 	pageNumber,
 	totalPages,
 	typePagination = "all",
@@ -17,6 +21,7 @@ export const Pagination = ({
 		>
 			{typePagination === "all" ? (
 				<PaginationAllPages
+					hrefValue={href}
 					pageNumber={pageNumber}
 					totalPages={totalPages}
 				/>
