@@ -51,14 +51,11 @@ export default async function CategoryProductPage({
 }: CategoryProductPageProps) {
 	const products = await getProductsByCategorySlug(params.category);
 
-	console.log("categoryyyyy  page number browser: ", params);
-	console.log("categoryyyyy all products: ", products);
 	if (!products) {
 		throw notFound();
 	}
 
 	const currentPage = params?.pageNumber || 1;
-	console.log("currentPage", currentPage);
 	const take = 4;
 	const offset = (currentPage - 1) * take;
 	const totalPages = Math.ceil(products.length / take);
@@ -66,16 +63,6 @@ export default async function CategoryProductPage({
 		offset,
 		currentPage * take,
 	);
-
-	if (currentPage == 1) {
-		console.log(productsCountOnPage);
-		console.log(offset, currentPage * take);
-		console.log("1111categoryyyyy  page number browser: ", params);
-	} else {
-		console.log(productsCountOnPage);
-		console.log(offset, currentPage * take);
-		console.log("2222categoryyyyy  page number browser: ", params);
-	}
 
 	const pageTitle =
 		`Category - ${products[0]?.categories[0]?.name}` || `Category`;
