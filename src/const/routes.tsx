@@ -11,7 +11,7 @@ export const routes: AppRoute[] = [
 		label: "All",
 	},
 	{
-		href: "/products/t-shirts" as Route,
+		href: "/categories/t-shirts/1" as Route,
 		label: "T-shirts",
 	},
 	{
