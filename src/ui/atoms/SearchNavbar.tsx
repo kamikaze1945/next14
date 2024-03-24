@@ -37,6 +37,7 @@ export const SearchNavbar = () => {
 				<div className="relative flex items-center">
 					<Search className="h4 absolute left-3 top-2 w-4 text-gray-400" />
 					<input
+						role="searchbox"
 						data-testid="search-navbar-input"
 						type="text"
 						placeholder="Search"

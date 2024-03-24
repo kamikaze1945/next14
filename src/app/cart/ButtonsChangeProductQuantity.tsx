@@ -67,6 +67,7 @@ export const ButtonsChangeProductQuantity = ({
 					</svg>
 				</button>
 				<input
+					data-testid="quantity"
 					type="text"
 					className="w-full min-w-[75px] max-w-[118px] border-y border-gray-200 bg-transparent py-[13px] text-center text-lg font-semibold text-gray-900 outline-none placeholder:text-gray-900"
 					placeholder={optimisticQuantity.toString()}
