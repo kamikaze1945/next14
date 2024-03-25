@@ -48,22 +48,28 @@ export const ProductSortSelect = () => {
 						name="sort"
 						onChange={onChangeSortProducts}
 					>
-						<option value="price" data-testid="sort-by-price">
+						<option value="price_asc" data-testid="sort-by-price">
 							Price: Low to High
 						</option>
-						<option value="-price" data-testid="sort-by-price">
+						<option value="price_desc" data-testid="sort-by-price">
 							Price: High to Low
 						</option>
-						<option value="name" data-testid="sort-by-name">
+						<option value="name_asc" data-testid="sort-by-name">
 							Name: A to Z
 						</option>
-						<option value="-name" data-testid="sort-by-name">
+						<option value="-name_desc" data-testid="sort-by-name">
 							Name: Z to A
 						</option>
-						<option value="avgRating" data-testid="sort-by-rating">
+						<option
+							value="avgRating_asc"
+							data-testid="sort-by-rating"
+						>
 							Rating: Low to High
 						</option>
-						<option value="-avgRating" data-testid="sort-by-rating">
+						<option
+							value="avgRating_desc"
+							data-testid="sort-by-rating"
+						>
 							Rating: High to Low
 						</option>
 					</select>
