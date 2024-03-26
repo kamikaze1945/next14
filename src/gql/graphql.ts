@@ -276,8 +276,7 @@ export type SortDirection =
 
 export type CardCreateMutationVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
-  productId: Scalars['String']['input'];
-  quantity: Scalars['Int']['input'];
+  input: CartItemInput;
 }>;
 
 
@@ -340,6 +339,8 @@ export type ProductsGetByCollectionSlugQuery = { collection?: { name: string, sl
 export type ProductsGetByPageQueryVariables = Exact<{
   take: Scalars['Int']['input'];
   skip: Scalars['Int']['input'];
+  order?: InputMaybe<SortDirection>;
+  orderBy?: InputMaybe<ProductSortBy>;
 }>;
 
 
@@ -420,11 +421,8 @@ export const ProductsListFragmentDoc = new TypedDocumentString(`
   }
 }`, {"fragmentName":"ProductsList"}) as unknown as TypedDocumentString<ProductsListFragment, unknown>;
 export const CardCreateDocument = new TypedDocumentString(`
-    mutation CardCreate($id: ID, $productId: String!, $quantity: Int!) {
-  cartFindOrCreate(
-    input: {items: {productId: $productId, quantity: $quantity}}
-    id: $id
-  ) {
+    mutation CardCreate($id: ID, $input: CartItemInput!) {
+  cartFindOrCreate(id: $id, input: {items: [$input]}) {
     id
     items {
       quantity
@@ -587,8 +585,8 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
   }
 }`) as unknown as TypedDocumentString<ProductsGetByCollectionSlugQuery, ProductsGetByCollectionSlugQueryVariables>;
 export const ProductsGetByPageDocument = new TypedDocumentString(`
-    query ProductsGetByPage($take: Int!, $skip: Int!) {
-  products(take: $take, skip: $skip) {
+    query ProductsGetByPage($take: Int!, $skip: Int!, $order: SortDirection, $orderBy: ProductSortBy) {
+  products(take: $take, skip: $skip, order: $order, orderBy: $orderBy) {
     data {
       id
       name

@@ -1,5 +1,15 @@
-query ProductsGetByPage($take: Int!, $skip: Int!) {
-	products(take: $take, skip: $skip) {
+query ProductsGetByPage(
+	$take: Int!
+	$skip: Int!
+	$order: SortDirection
+	$orderBy: ProductSortBy
+) {
+	products(
+		take: $take
+		skip: $skip
+		order: $order
+		orderBy: $orderBy
+	) {
 		data {
 			id
 			name

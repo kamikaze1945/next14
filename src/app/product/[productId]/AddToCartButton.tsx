@@ -20,7 +20,7 @@ export const AddToCartButton = () => {
 			)}
 		>
 			{pending ? (
-				<div aria-busy={true} className="flex justify-center">
+				<div className="flex justify-center">
 					<svg
 						className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
 						xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ export const AddToCartButton = () => {
 							cy="12"
 							r="10"
 							stroke="currentColor"
-							stroke-width="4"
+							strokeWidth="4"
 						></circle>
 						<path
 							className="opacity-75"

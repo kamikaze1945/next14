@@ -14,7 +14,7 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "mutation CardCreate($id: ID, $productId: String!, $quantity: Int!) {\n  cartFindOrCreate(\n    input: {items: {productId: $productId, quantity: $quantity}}\n    id: $id\n  ) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}": types.CardCreateDocument,
+    "mutation CardCreate($id: ID, $input: CartItemInput!) {\n  cartFindOrCreate(id: $id, input: {items: [$input]}) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}": types.CardCreateDocument,
     "mutation CartAddProduct($id: ID!, $productId: String!, $quantity: Int!) {\n  cartAddItem(\n    id: $id\n    input: {item: {productId: $productId, quantity: $quantity}}\n  ) {\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}": types.CartAddProductDocument,
     "mutation CartChangeItemQuantity($id: ID!, $productId: ID!, $quantity: Int!) {\n  cartChangeItemQuantity(id: $id, productId: $productId, quantity: $quantity) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}": types.CartChangeItemQuantityDocument,
     "query CartGetById($id: ID!) {\n  cart(id: $id) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}": types.CartGetByIdDocument,
@@ -22,7 +22,7 @@ const documents = {
     "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    id\n    name\n    description\n    price\n    images {\n      url\n    }\n    categories {\n      slug\n      name\n    }\n    collections {\n      name\n      slug\n    }\n  }\n}": types.ProductGetByIdDocument,
     "query ProductsGetByCategorySlug($slug: String!) {\n  category(slug: $slug) {\n    products {\n      ...ProductsListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!) {\n  collection(slug: $slug) {\n    name\n    slug\n    description\n    products {\n      ...ProductsListItem\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
-    "query ProductsGetByPage($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      price\n      images {\n        url\n      }\n      categories {\n        slug\n        name\n      }\n      collections {\n        name\n        slug\n      }\n    }\n    meta {\n      count\n      total\n    }\n  }\n}": types.ProductsGetByPageDocument,
+    "query ProductsGetByPage($take: Int!, $skip: Int!, $order: SortDirection, $orderBy: ProductSortBy) {\n  products(take: $take, skip: $skip, order: $order, orderBy: $orderBy) {\n    data {\n      id\n      name\n      description\n      price\n      images {\n        url\n      }\n      categories {\n        slug\n        name\n      }\n      collections {\n        name\n        slug\n      }\n    }\n    meta {\n      count\n      total\n    }\n  }\n}": types.ProductsGetByPageDocument,
     "query ProductsGetList {\n  products {\n    data {\n      ...ProductsListItem\n    }\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetSearchByTerm($searchTearm: String) {\n  products(search: $searchTearm) {\n    data {\n      id\n      name\n      description\n      price\n      images {\n        url\n      }\n      categories {\n        slug\n        name\n      }\n      collections {\n        name\n        slug\n      }\n    }\n  }\n}": types.ProductsGetSearchByTermDocument,
     "fragment ProductsList on Query {\n  products {\n    data {\n      ...ProductsListItem\n    }\n  }\n}": types.ProductsListFragmentDoc,
@@ -32,7 +32,7 @@ const documents = {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation CardCreate($id: ID, $productId: String!, $quantity: Int!) {\n  cartFindOrCreate(\n    input: {items: {productId: $productId, quantity: $quantity}}\n    id: $id\n  ) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}"): typeof import('./graphql').CardCreateDocument;
+export function graphql(source: "mutation CardCreate($id: ID, $input: CartItemInput!) {\n  cartFindOrCreate(id: $id, input: {items: [$input]}) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}"): typeof import('./graphql').CardCreateDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -64,7 +64,7 @@ export function graphql(source: "query ProductsGetByCollectionSlug($slug: String
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetByPage($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      price\n      images {\n        url\n      }\n      categories {\n        slug\n        name\n      }\n      collections {\n        name\n        slug\n      }\n    }\n    meta {\n      count\n      total\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByPageDocument;
+export function graphql(source: "query ProductsGetByPage($take: Int!, $skip: Int!, $order: SortDirection, $orderBy: ProductSortBy) {\n  products(take: $take, skip: $skip, order: $order, orderBy: $orderBy) {\n    data {\n      id\n      name\n      description\n      price\n      images {\n        url\n      }\n      categories {\n        slug\n        name\n      }\n      collections {\n        name\n        slug\n      }\n    }\n    meta {\n      count\n      total\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByPageDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

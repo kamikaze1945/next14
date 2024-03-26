@@ -5,15 +5,22 @@ import { useEffect, useState } from "react";
 
 export const ProductSortSelect = () => {
 	const [currentSortSelectedInUrl, setCurrentSortSelectedInUrl] =
-		useState("");
+		useState("default");
+
 	const sortParams = useSearchParams();
 	const router = useRouter();
 
 	useEffect(() => {
 		const params = new URLSearchParams(sortParams);
-		const sortUrlSelected = sortParams.get("sort");
-		setCurrentSortSelectedInUrl(sortUrlSelected || "");
-		console.log("URRRRRLL", sortUrlSelected);
+		const orderSelected = sortParams.get("order");
+		const orderByUrlSelected = sortParams.get("orderBy");
+
+		if (orderSelected && orderByUrlSelected) {
+			const orderSelect = `${orderByUrlSelected}_${orderSelected}`;
+			setCurrentSortSelectedInUrl(orderSelect);
+		}
+
+		console.log("URRRRRLL", orderSelected);
 	}, []);
 
 	const onChangeSortProducts = (
@@ -21,14 +28,27 @@ export const ProductSortSelect = () => {
 	) => {
 		// get value select current change in select
 		const sortValueOnChange = event.target.value;
+		if (!sortValueOnChange) {
+			return;
+		}
+
+		const orderSelect = sortValueOnChange || "";
+		const orderBy = orderSelect.split("_")[0];
+		const order = orderSelect.split("_")[1];
+
+		console.log("order", order);
+		console.log("orderBy", orderBy);
+
 		setCurrentSortSelectedInUrl(sortValueOnChange);
 		// get query from browser url
 		const params = new URLSearchParams(sortParams);
 
 		if (sortValueOnChange) {
-			params.set("sort", sortValueOnChange);
+			params.set("orderBy", orderBy);
+			params.set("order", order);
 		} else {
-			params.delete("sort");
+			params.delete("orderBy");
+			params.delete("order");
 		}
 
 		const url = `/products?${params.toString()}`;
@@ -48,6 +68,10 @@ export const ProductSortSelect = () => {
 						name="sort"
 						onChange={onChangeSortProducts}
 					>
+						<option disabled value="default" data-testid="default">
+							Default
+						</option>
+
 						<option value="price_asc" data-testid="sort-by-price">
 							Price: Low to High
 						</option>
@@ -57,19 +81,13 @@ export const ProductSortSelect = () => {
 						<option value="name_asc" data-testid="sort-by-name">
 							Name: A to Z
 						</option>
-						<option value="-name_desc" data-testid="sort-by-name">
+						<option value="name_desc" data-testid="sort-by-name">
 							Name: Z to A
 						</option>
-						<option
-							value="avgRating_asc"
-							data-testid="sort-by-rating"
-						>
+						<option value="rating_asc" data-testid="sort-by-rating">
 							Rating: Low to High
 						</option>
-						<option
-							value="avgRating_desc"
-							data-testid="sort-by-rating"
-						>
+						<option value="rating_desc" data-testid="sort-by-rating">
 							Rating: High to Low
 						</option>
 					</select>

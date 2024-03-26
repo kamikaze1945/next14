@@ -1,8 +1,5 @@
-mutation CardCreate($id: ID, $productId: String!, $quantity: Int!) {
-	cartFindOrCreate(
-		input: { items: { productId: $productId, quantity: $quantity } }
-		id: $id
-	) {
+mutation CardCreate($id: ID, $input: CartItemInput!) {
+	cartFindOrCreate(id: $id, input: { items: [$input] }) {
 		id
 		items {
 			quantity

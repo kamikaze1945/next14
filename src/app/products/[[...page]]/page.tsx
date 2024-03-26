@@ -6,6 +6,7 @@ import { ProductList } from "@/ui/organisms/ProductList";
 import { Suspense } from "react";
 import { PageTitle } from "@/ui/atoms/PageTitle";
 import { ProductSortSelect } from "@/ui/atoms/ProductSortSelect";
+import { ProductSortBy, SortDirection } from "@/gql/graphql";
 
 export const dynamic = "force-dynamic";
 
@@ -35,8 +36,27 @@ export default async function ProductsPage({
 	const currentPage = params?.page || 1;
 	const take = 10;
 	const offset = (currentPage - 1) * take || 0;
-	const products = await getProductsByPage(take, offset);
 
+	const order = searchParams.order
+		? ((typeof searchParams.order === "string"
+				? searchParams.order.toUpperCase()
+				: searchParams.order[0].toUpperCase()) as SortDirection)
+		: "ASC";
+
+	const orderBy = searchParams.orderBy
+		? ((typeof searchParams.orderBy === "string"
+				? searchParams.orderBy.toUpperCase()
+				: searchParams.orderBy[0].toUpperCase()) as ProductSortBy)
+		: "DEFAULT";
+
+	const products = await getProductsByPage(
+		take,
+		offset,
+		order,
+		orderBy,
+	);
+
+	console.log("ProductsPage:::::", take, offset, order, orderBy);
 	if (!products) {
 		throw notFound();
 	}

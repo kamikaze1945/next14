@@ -26,7 +26,7 @@ export const RelatedProductList = async ({
 
 	return (
 		<Suspense>
-			<div data-testid="related-products" aria-busy="true">
+			<div data-testid="related-products">
 				<RelatedProductItems products={products?.slice(-4)} />
 			</div>
 		</Suspense>

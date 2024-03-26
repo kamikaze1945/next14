@@ -57,9 +57,9 @@ export default async function SingleProductPage({
 		"use server";
 
 		const cart = await getOrCreateCart(params.productId);
-		if (cart?.id) {
-			await addToCart(cart.id, params.productId);
-		}
+		// if (cart?.id) {
+		// 	await addToCart(cart.id, params.productId);
+		// }
 		revalidateTag("cart");
 	}
 
@@ -102,13 +102,13 @@ export default async function SingleProductPage({
 								hidden
 								readOnly
 							/>
-							<AddToCartButton />
+							<AddToCartButton data-testid="add-to-cart-button" />
 						</form>
 					</div>
 				</div>
 			</article>
 			<aside>
-				<Suspense aria-busy="true">
+				<Suspense>
 					<RelatedProductList
 						params={{
 							categorySlug: product?.categories[0]?.slug || undefined,

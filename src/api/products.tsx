@@ -1,10 +1,12 @@
 import {
 	ProductGetByIdDocument,
+	ProductSortBy,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
 	ProductsGetByPageDocument,
 	ProductsGetListDocument,
 	ProductsGetSearchByTermDocument,
+	SortDirection,
 } from "@/gql/graphql";
 import type {
 	ProductItemType,
@@ -15,12 +17,16 @@ import { executeGraphQl } from "@/api/graphqlApi";
 export const getProductsByPage = async (
 	take: number,
 	skip: number,
+	order?: SortDirection,
+	orderBy?: ProductSortBy,
 ) => {
 	const graphqlResponse = await executeGraphQl({
 		query: ProductsGetByPageDocument,
 		variables: {
 			take: take || 10,
 			skip: skip || 0,
+			order: order,
+			orderBy: orderBy,
 		},
 		next: {
 			tags: ["products"],

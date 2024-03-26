@@ -10,7 +10,7 @@ export const RelatedProductItems = ({
 	products: ProductsListItemFragment[];
 }) => {
 	return (
-		<Suspense aria-busy="true">
+		<Suspense>
 			<section>
 				<ul
 					data-testid="products-list"

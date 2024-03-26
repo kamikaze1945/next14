@@ -7,21 +7,29 @@ import {
 	CartAddProductDocument,
 	CartChangeItemQuantityDocument,
 	CartGetByIdDocument,
+	CartItemInput,
 	ProductGetByIdDocument,
 } from "@/gql/graphql";
+import { revalidateTag } from "next/cache";
 
 export async function getOrCreateCart(productId: string) {
 	const cart = await getCartIdFromCookies();
-	if (cart) {
-		return cart;
+	if (!cart?.id) {
+		const cardData = await createCart("", {
+			productId: productId,
+			quantity: 1,
+		});
+		if (cardData?.cartFindOrCreate === null) {
+			throw new Error("Error create new Cart order");
+		}
 	}
 
-	const cardData = await createCart("", productId, 1);
-	if (cardData?.cartFindOrCreate === null) {
-		throw new Error("Error create new Cart order");
+	if (cart?.id) {
+		await addToCart(cart?.id, productId);
 	}
+	revalidateTag("cart");
 
-	return cardData.cartFindOrCreate;
+	return cart;
 }
 
 export async function getCartIdFromCookies() {
@@ -60,15 +68,14 @@ export async function getCardById(cartId: string) {
 
 export async function createCart(
 	cartId: string,
-	productId: string,
-	quantity: number = 1,
+	//input: CartItemInput,
+	input: CartItemInput,
 ) {
 	const resultData = await executeGraphQl({
 		query: CardCreateDocument,
 		variables: {
 			id: cartId,
-			productId: productId,
-			quantity: quantity,
+			input: input || null,
 		},
 		cache: "no-store",
 		next: {
