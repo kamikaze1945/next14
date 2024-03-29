@@ -11,21 +11,7 @@ query ProductsGetByPage(
 		orderBy: $orderBy
 	) {
 		data {
-			id
-			name
-			description
-			price
-			images {
-				url
-			}
-			categories {
-				slug
-				name
-			}
-			collections {
-				name
-				slug
-			}
+			...ProductsListItem
 		}
 		meta {
 			count

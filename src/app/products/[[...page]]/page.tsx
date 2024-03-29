@@ -56,7 +56,6 @@ export default async function ProductsPage({
 		orderBy,
 	);
 
-	console.log("ProductsPage:::::", take, offset, order, orderBy);
 	if (!products) {
 		throw notFound();
 	}

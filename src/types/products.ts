@@ -25,3 +25,12 @@ export type Rating = {
 	rate: number;
 	count: number;
 };
+
+export type ReviewType = {
+	id: string;
+	name: string;
+	content: string;
+	email: string;
+	rating: number;
+	headline: string;
+};

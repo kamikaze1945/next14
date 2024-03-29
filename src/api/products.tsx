@@ -6,13 +6,40 @@ import {
 	ProductsGetByPageDocument,
 	ProductsGetListDocument,
 	ProductsGetSearchByTermDocument,
+	ReviewCreateDocument,
 	SortDirection,
 } from "@/gql/graphql";
 import type {
 	ProductItemType,
 	ProductResponseItem,
+	ReviewType,
 } from "@/types/products";
 import { executeGraphQl } from "@/api/graphqlApi";
+import { revalidateTag } from "next/cache";
+
+export const createReview = async (
+	productId: string,
+	formData: FormData,
+) => {
+	console.log("formData", formData);
+
+	const reviewData = Object.fromEntries(
+		formData,
+	) as unknown as ReviewType;
+	const response = executeGraphQl({
+		query: ReviewCreateDocument,
+		variables: {
+			author: reviewData.name,
+			title: reviewData.headline,
+			description: reviewData.content,
+			email: reviewData.email,
+			productId: productId.toString(),
+			rating: Number(reviewData.rating),
+		},
+	});
+	//revalidateTag("reviews");
+	return response;
+};
 
 export const getProductsByPage = async (
 	take: number,
@@ -39,16 +66,6 @@ export const getProductsByPage = async (
 		meta: graphqlResponse?.products?.meta,
 	};
 };
-
-// export const getProductList = async () => {
-
-// 	const graphqlResponse = await executeGraphQl({
-// 		query: ProductsGetListDocument,
-// 		variables: {},
-// 	});
-
-// 	return graphqlResponse?.products?.data || [];
-// };
 
 export const searchPoductsByTerm = async (searchTearm: string) => {
 	let graphqlResponse;

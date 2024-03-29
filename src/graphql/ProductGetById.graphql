@@ -15,5 +15,15 @@ query ProductGetById($id: ID!) {
 			name
 			slug
 		}
+		reviews {
+			id
+			author
+			title
+			description
+			email
+			rating
+			createdAt
+			updatedAt
+		}
 	}
 }

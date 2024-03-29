@@ -10,6 +10,7 @@ import { RelatedProductList } from "@/ui/organisms/RelatedProductList";
 import { AddToCartButton } from "@/app/product/[productId]/AddToCartButton";
 import { addToCart, getOrCreateCart } from "@/api/cart";
 import { revalidateTag } from "next/cache";
+import { ReviewsList } from "@/ui/molecules/ReviewList";
 
 export const dynamic = "force-dynamic";
 
@@ -53,18 +54,15 @@ export default async function SingleProductPage({
 		throw notFound();
 	}
 
+	console.log(product?.reviews);
 	async function addProductToCartAction(_formData: FormData) {
 		"use server";
 
 		const cart = await getOrCreateCart(params.productId);
-		// if (cart?.id) {
-		// 	await addToCart(cart.id, params.productId);
-		// }
-		revalidateTag("cart");
 	}
 
 	return (
-		<>
+		<div>
 			<article
 				className="mx-auto grid max-w-7xl py-8"
 				data-referral={referral}
@@ -116,6 +114,14 @@ export default async function SingleProductPage({
 					/>
 				</Suspense>
 			</aside>
-		</>
+			<article>
+				<Suspense>
+					<ReviewsList
+						productId={product.id}
+						reviews={product?.reviews || []}
+					/>
+				</Suspense>
+			</article>
+		</div>
 	);
 }

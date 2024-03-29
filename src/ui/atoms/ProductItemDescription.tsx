@@ -1,4 +1,5 @@
 import { type ProductsListItemFragment } from "@/gql/graphql";
+import { ProductRating } from "@/ui/molecules/ProductRating";
 import { formatMoney } from "@/utils";
 
 type ProductItemDescriptionProps = {
@@ -6,7 +7,7 @@ type ProductItemDescriptionProps = {
 };
 
 export const ProductItemDescription = ({
-	product: { name, categories, price },
+	product: { name, categories, price, rating },
 }: ProductItemDescriptionProps) => {
 	return (
 		<div className="justif-between mt-2 flex">
@@ -15,19 +16,19 @@ export const ProductItemDescription = ({
 					{name}
 				</h1>
 				{categories && (
-					<p className="mt-3 text-sm text-gray-500">
+					<div className="mt-3 text-sm text-gray-500">
 						<span className="sr-only">Category: </span>
 						{categories[0].name}
-					</p>
+					</div>
 				)}
+				<ProductRating rating={rating || 0} />
 			</div>
-			<p
-				data-testid="product-price"
-				className="text-sm font-medium text-gray-900"
-			>
+			<div className="text-sm font-medium text-gray-900">
 				<span className="sr-only">Cena: </span>
-				{formatMoney(price / 100)}
-			</p>
+				<span data-testid="product-price">
+					{formatMoney(price / 100)}
+				</span>
+			</div>
 		</div>
 	);
 };

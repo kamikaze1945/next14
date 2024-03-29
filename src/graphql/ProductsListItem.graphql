@@ -3,6 +3,7 @@ fragment ProductsListItem on Product {
 	name
 	description
 	price
+	rating
 	images {
 		url
 	}
@@ -13,5 +14,13 @@ fragment ProductsListItem on Product {
 	collections {
 		name
 		slug
+	}
+	reviews {
+		id
+		author
+		title
+		description
+		email
+		rating
 	}
 }

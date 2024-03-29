@@ -16,6 +16,14 @@ query ProductsGetSearchByTerm($searchTearm: String) {
 				name
 				slug
 			}
+			reviews {
+				id
+				author
+				title
+				description
+				email
+				rating
+			}
 		}
 	}
 }

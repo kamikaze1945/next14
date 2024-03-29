@@ -71,12 +71,11 @@ export const ProductSortSelect = () => {
 						<option disabled value="default" data-testid="default">
 							Default
 						</option>
-
-						<option value="price_asc" data-testid="sort-by-price">
-							Price: Low to High
-						</option>
 						<option value="price_desc" data-testid="sort-by-price">
 							Price: High to Low
+						</option>
+						<option value="price_asc" data-testid="sort-by-price">
+							Price: Low to High
 						</option>
 						<option value="name_asc" data-testid="sort-by-name">
 							Name: A to Z
