@@ -11,7 +11,7 @@ import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export default async function CartPage() {
 	const cart = await getCartIdFromCookies();
-	console.log("stripe", process.env.STRIPE_SECRET_KEY);
+
 	if (!cart) {
 		//	redirect("/products");
 	}

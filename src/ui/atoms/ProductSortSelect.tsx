@@ -19,8 +19,6 @@ export const ProductSortSelect = () => {
 			const orderSelect = `${orderByUrlSelected}_${orderSelected}`;
 			setCurrentSortSelectedInUrl(orderSelect);
 		}
-
-		console.log("URRRRRLL", orderSelected);
 	}, []);
 
 	const onChangeSortProducts = (
@@ -35,9 +33,6 @@ export const ProductSortSelect = () => {
 		const orderSelect = sortValueOnChange || "";
 		const orderBy = orderSelect.split("_")[0];
 		const order = orderSelect.split("_")[1];
-
-		console.log("order", order);
-		console.log("orderBy", orderBy);
 
 		setCurrentSortSelectedInUrl(sortValueOnChange);
 		// get query from browser url
@@ -68,9 +63,6 @@ export const ProductSortSelect = () => {
 						name="sort"
 						onChange={onChangeSortProducts}
 					>
-						<option disabled value="default" data-testid="default">
-							Default
-						</option>
 						<option value="price_desc" data-testid="sort-by-price">
 							Price: High to Low
 						</option>

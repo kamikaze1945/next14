@@ -35,40 +35,26 @@ export async function POST(request: NextRequest): Promise<Response> {
 			event.data.object as Stripe.Checkout.Session;
 			event.data.object.metadata?.cartId;
 			const session = event.data.object as Stripe.Checkout.Session;
-
-			console.log(session);
-
 			break;
 		}
 		case "checkout.session.expired": {
 			event.data.object as Stripe.Checkout.Session;
 			const session = event.data.object as Stripe.Checkout.Session;
-
-			console.log(session);
-
 			break;
 		}
 		case "checkout.session.async_payment_failed": {
 			event.data.object as Stripe.Checkout.Session;
 			const session = event.data.object as Stripe.Checkout.Session;
-
-			console.log(session);
-
 			break;
 		}
 		case "checkout.session.async_payment_succeeded": {
 			event.data.object as Stripe.Checkout.Session;
 			const session = event.data.object as Stripe.Checkout.Session;
-
-			console.log(session);
-
 			break;
 		}
 	}
 
 	const body = await request.json();
-
-	console.log(body);
 
 	return new Response("OK", { status: 204 });
 }

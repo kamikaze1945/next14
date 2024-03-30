@@ -33,8 +33,6 @@ export default async function CartSuccessPage({
 		searchParams?.sessionId,
 	);
 
-	console.log(checkoutSession);
-
 	return (
 		<div>
 			<h1>Payment Success</h1>

@@ -54,7 +54,6 @@ export default async function SingleProductPage({
 		throw notFound();
 	}
 
-	console.log(product?.reviews);
 	async function addProductToCartAction(_formData: FormData) {
 		"use server";
 
@@ -79,7 +78,6 @@ export default async function SingleProductPage({
 						<div className="mt-4 flex items-center">
 							${product?.price}
 						</div>
-						{/* <ProductItemDescription product={product} /> */}
 						<div className="mt-4 space-y-6">
 							{product?.description}
 						</div>

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import clsx from "clsx";
 import { type ReviewFragment } from "@/gql/graphql";
 import { createReview } from "@/api/products";
 import { ReviewType } from "@/types/products";
@@ -23,19 +24,19 @@ export const ReviewsForm = ({
 				name="headline"
 				id="headline"
 				placeholder="Title"
-				className="block border-2 border-gray-600 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-500 focus:border-blue-500 active:border-blue-500"
+				className="block border-2 border-gray-100 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-300 focus:border-blue-300 active:border-blue-300"
 			/>
 			<textarea
 				name="content"
 				id="content"
 				placeholder="Description"
 				rows={6}
-				className="block border-2 border-gray-600 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-500 focus:border-blue-500 active:border-blue-500"
+				className="block border-2 border-gray-100 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-300 focus:border-blue-300 active:border-blue-300"
 			/>
 			<select
 				name="rating"
 				id="rating"
-				className="block border-2 border-gray-600 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-500 focus:border-blue-500 active:border-blue-500"
+				className="block border-2 border-gray-100 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-300 focus:border-blue-300 active:border-blue-300"
 				defaultValue="Rating"
 			>
 				<option value="Rating" disabled>
@@ -52,18 +53,23 @@ export const ReviewsForm = ({
 				name="name"
 				id="name"
 				placeholder="Author"
-				className="block border-2 border-gray-600 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-500 focus:border-blue-500 active:border-blue-500"
+				className="block border-2 border-gray-100 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-300 focus:border-blue-300 active:border-blue-300"
 			/>
 			<input
 				type="email"
 				name="email"
 				id="email"
 				placeholder="E-mail"
-				className="block border-2 border-gray-600 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-500 focus:border-blue-500 active:border-blue-500"
+				className="block border-2 border-gray-100 bg-gray-50 p-2 outline-none transition-colors duration-300 hover:border-blue-300 focus:border-blue-300 active:border-blue-300"
 			/>
 			<button
 				type="submit"
-				className="rounded-md bg-slate-700 p-2 text-white transition-colors duration-300 hover:bg-slate-900 active:bg-slate-900"
+				className={clsx(
+					"me-5 w-full transform rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-4 text-center text-sm font-medium text-white transition-transform hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-green-200  active:scale-95 disabled:cursor-wait  dark:focus:ring-green-800",
+					{
+						["disabled:bg-slate-50"]: null,
+					},
+				)}
 				formAction={async (formData) => {
 					const { name, content, email, rating, headline } =
 						Object.fromEntries(formData) as unknown as ReviewType;

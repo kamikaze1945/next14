@@ -22,6 +22,7 @@ export async function getOrCreateCart(productId: string) {
 		if (cardData?.cartFindOrCreate === null) {
 			throw new Error("Error create new Cart order");
 		}
+		return;
 	}
 
 	if (cart?.id) {
@@ -68,7 +69,6 @@ export async function getCardById(cartId: string) {
 
 export async function createCart(
 	cartId: string,
-	//input: CartItemInput,
 	input: CartItemInput,
 ) {
 	const resultData = await executeGraphQl({
@@ -129,9 +129,7 @@ export async function addToCart(
 		for (const item of cart.items) {
 			if (item.product.id === productId) {
 				quantity = item.quantity + 1;
-				console.log(
-					`Product IDssssss: ${item.product.id}, Name: ${item.product.name}, Quantity: ${item.quantity} , item.quantity ${item.quantity}  Quantity: ${quantity}`,
-				);
+
 				await executeGraphQl({
 					query: CartChangeItemQuantityDocument,
 					variables: {
