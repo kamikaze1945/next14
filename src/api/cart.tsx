@@ -22,7 +22,6 @@ export async function getOrCreateCart(productId: string) {
 		if (cardData?.cartFindOrCreate === null) {
 			throw new Error("Error create new Cart order");
 		}
-		return;
 	}
 
 	if (cart?.id) {
