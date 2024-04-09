@@ -2,6 +2,7 @@
 
 import { useOptimistic, useState } from "react";
 import { changeProductQuantity } from "@/app/cart/action";
+import { useRouter } from "next/navigation";
 
 export const ButtonsChangeProductQuantity = ({
 	cartId,
@@ -12,6 +13,7 @@ export const ButtonsChangeProductQuantity = ({
 	productId: string;
 	quantity: number;
 }) => {
+	const router = useRouter();
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
 		quantity,
 		(_state, newQuantity: number) => newQuantity,
@@ -25,6 +27,7 @@ export const ButtonsChangeProductQuantity = ({
 		<form>
 			<div className="mx-auto flex w-full items-center justify-center">
 				<button
+					type="submit"
 					data-testid="decrement"
 					className="group flex items-center justify-center rounded-l-full border border-gray-200 px-4 py-[16px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
 					formAction={async () => {
@@ -34,6 +37,7 @@ export const ButtonsChangeProductQuantity = ({
 							productId,
 							optimisticQuantity - 1,
 						);
+						router.refresh();
 					}}
 				>
 					<svg
@@ -80,15 +84,17 @@ export const ButtonsChangeProductQuantity = ({
 					readOnly
 				/> */}
 				<button
+					type="submit"
 					data-testid="increment"
 					className="group flex items-center justify-center rounded-r-full border border-gray-200 px-4 py-[16px] shadow-sm shadow-transparent transition-all duration-500 hover:border-gray-300 hover:bg-gray-50 hover:shadow-gray-200"
 					formAction={async () => {
-						setOptimisticQuantity(optimisticQuantity + 1);
 						await changeProductQuantity(
 							cartId,
 							productId,
 							optimisticQuantity + 1,
 						);
+						setOptimisticQuantity(optimisticQuantity + 1);
+						router.refresh();
 					}}
 				>
 					<svg

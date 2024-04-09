@@ -1,0 +1,16 @@
+query OrdersGetByEmail($email: String!) {
+	orders(email: $email, order: ASC, orderBy: DEFAULT) {
+		data {
+			id
+			createdAt
+			totalAmount
+			updatedAt
+			status
+			lines
+		}
+		meta {
+			count
+			total
+		}
+	}
+}

@@ -99,7 +99,7 @@
 	},
 	"overrides": [
 		{
-			"files": ["src/app/**/*.ts?(x)", "middleware.ts"],
+			"files": ["src/app/**/*.ts?(x)", "src/middleware.ts"],
 			"rules": {
 				"import/no-default-export": "off"
 			}

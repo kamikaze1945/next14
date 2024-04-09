@@ -7,6 +7,8 @@ import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Logo } from "@/ui/atoms/Logo";
 import { routes } from "@/const/routes";
 import { SearchNavbar } from "@/ui/atoms/SearchNavbar";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 
 export const Navigation = ({ quantity }: { quantity: number }) => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
@@ -28,10 +30,11 @@ export const Navigation = ({ quantity }: { quantity: number }) => {
 	return (
 		<nav className="border-gray-200 bg-white py-2.5 dark:bg-gray-900">
 			<div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4">
-				{/* <ActiveLink href="/" className="flex items-center">
-					
-				</ActiveLink> */}
-				<Logo />
+				{
+					<ActiveLink href="/" className="flex items-center">
+						<Logo />
+					</ActiveLink>
+				}
 				<div className="flex items-center lg:order-2">
 					<div className="mr-4 mt-2 hidden sm:inline-block">
 						<span></span>
@@ -44,6 +47,14 @@ export const Navigation = ({ quantity }: { quantity: number }) => {
 							<ShoppingCart />
 							<span className="ml-1">{quantity}</span>
 						</ActiveLink>
+					</div>
+					<div className="ml-4 flex items-center">
+						<SignedIn>
+							<UserButton />
+						</SignedIn>
+						<SignedOut>
+							<SignInButton />
+						</SignedOut>
 					</div>
 					<div
 						className="ml-1 inline-flex cursor-pointer items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

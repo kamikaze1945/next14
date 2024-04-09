@@ -1,11 +1,8 @@
-import { redirect } from "next/navigation";
 import Image from "next/image";
 import { getCartIdFromCookies } from "@/api/cart";
 import { formatMoney } from "@/utils";
 import { ButtonsChangeProductQuantity } from "@/app/cart/ButtonsChangeProductQuantity";
 import { ButtonRemoveProduct } from "@/app/cart/ButtonRemoveProduct";
-import Stripe from "stripe";
-import { cookies } from "next/headers";
 import { handlePaymentAction } from "@/app/cart/action";
 import { PageTitle } from "@/ui/atoms/PageTitle";
 

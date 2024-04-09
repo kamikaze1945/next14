@@ -11,7 +11,7 @@ export default async function ModalCart() {
 	const cart = await getCartIdFromCookies();
 
 	return (
-		<>
+		<aside className="animation-fade-in fixed inset-0 z-20 backdrop-blur-sm">
 			<Overlay />
 			<div className="absolute right-0 top-0 z-40 h-screen w-full max-w-sm overflow-auto bg-white">
 				<section>
@@ -154,6 +154,6 @@ export default async function ModalCart() {
 					)}
 				</section>
 			</div>
-		</>
+		</aside>
 	);
 }

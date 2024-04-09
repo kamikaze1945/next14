@@ -19,6 +19,7 @@ const documents = {
     "mutation CartChangeItemQuantity($id: ID!, $productId: ID!, $quantity: Int!) {\n  cartChangeItemQuantity(id: $id, productId: $productId, quantity: $quantity) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}": types.CartChangeItemQuantityDocument,
     "query CartGetById($id: ID!) {\n  cart(id: $id) {\n    id\n    items {\n      quantity\n      product {\n        id\n        name\n        price\n        images {\n          alt\n          url\n        }\n      }\n    }\n  }\n}": types.CartGetByIdDocument,
     "mutation CartRemoveProduct($id: ID!, $productId: ID!) {\n  cartRemoveItem(id: $id, productId: $productId) {\n    id\n    items {\n      product {\n        id\n      }\n    }\n  }\n}": types.CartRemoveProductDocument,
+    "query OrdersGetByEmail($email: String!) {\n  orders(email: $email, order: ASC, orderBy: DEFAULT) {\n    data {\n      id\n      createdAt\n      totalAmount\n      updatedAt\n      status\n      lines\n    }\n    meta {\n      count\n      total\n    }\n  }\n}": types.OrdersGetByEmailDocument,
     "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    id\n    name\n    description\n    price\n    images {\n      url\n    }\n    categories {\n      slug\n      name\n    }\n    collections {\n      name\n      slug\n    }\n    reviews {\n      id\n      author\n      title\n      description\n      email\n      rating\n      createdAt\n      updatedAt\n    }\n  }\n}": types.ProductGetByIdDocument,
     "query ProductsGetByCategorySlug($slug: String!) {\n  category(slug: $slug) {\n    products {\n      ...ProductsListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!) {\n  collection(slug: $slug) {\n    name\n    slug\n    description\n    products {\n      ...ProductsListItem\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
@@ -51,6 +52,10 @@ export function graphql(source: "query CartGetById($id: ID!) {\n  cart(id: $id) 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation CartRemoveProduct($id: ID!, $productId: ID!) {\n  cartRemoveItem(id: $id, productId: $productId) {\n    id\n    items {\n      product {\n        id\n      }\n    }\n  }\n}"): typeof import('./graphql').CartRemoveProductDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query OrdersGetByEmail($email: String!) {\n  orders(email: $email, order: ASC, orderBy: DEFAULT) {\n    data {\n      id\n      createdAt\n      totalAmount\n      updatedAt\n      status\n      lines\n    }\n    meta {\n      count\n      total\n    }\n  }\n}"): typeof import('./graphql').OrdersGetByEmailDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
