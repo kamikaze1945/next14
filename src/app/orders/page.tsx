@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 
 export default async function OrderPage() {
 	const user = await currentUser();
+
+	JSON.stringify(user);
 	if (!user) {
 		redirect("/sign-in");
 	}
@@ -13,29 +15,42 @@ export default async function OrderPage() {
 		return <div>User does not have email</div>;
 	}
 
-	console.log(email);
-	const ordersResponse  = await getOrdersByEmail(email);
+	let email2 = "test@test.pl"; //todo: delete value
+	const ordersResponse = await getOrdersByEmail(email2);
 
-	<pre>{JSON.stringify(orders, null, 2)}</pre>;
 	return (
 		<div>
 			<h1>{user.firstName} Orders</h1>
+			<h3>
+				EMAIL: {user.emailAddresses[0]?.emailAddress}
+				{/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
+			</h3>
 
 			{ordersResponse?.orders?.data?.length === 0 ? (
 				<div>No orders found</div>
 			) : (
-				// <ul>				{{ordersResponse.orders.data.map((order) =>
-				// 	order.id && order.attributes?.createdAt && (
-				// 	  <li key={order.id}>
-				// 		<div>{order.attributes.orderId}</div>
-				// 		<div>
-				// 		  <time dateTime={order.attributes.createdAt}>
-				// 			{order.attributes.createdAt}
-				// 		  </time>
-				// 		</div>
-				// 	  </li>
-				// 	)
-				//   )} }</ul>
+				<div>
+					<ul>
+						{ordersResponse?.orders?.data.map((order) => (
+							<li key={order.id} className="mb-3">
+								<h3>Order: {order.id}</h3>
+								<ul>
+									<li>Total amount: {order.totalAmount}</li>
+									<li>Status order: {order.status}</li>
+									<li>
+										{order.lines.map((item) => {
+											<li key={item.id}>
+												<h4>Product name: {item.productName}</h4>
+												<p>Quantity: {item.quantity}</p>
+												<p>Price: {item.price}</p>
+											</li>;
+										})}
+									</li>
+								</ul>
+							</li>
+						))}
+					</ul>
+				</div>
 			)}
 		</div>
 	);
