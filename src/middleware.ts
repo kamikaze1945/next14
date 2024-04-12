@@ -14,6 +14,10 @@ const intlMiddleware = createIntlMiddleware({
 	localePrefix,
 });
 
+export const config = {
+	matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+};
+
 export default authMiddleware({
 	beforeAuth(req) {
 		return intlMiddleware(req);
@@ -37,7 +41,3 @@ export default authMiddleware({
 		"/:locale/contact",
 	],
 });
-
-export const config = {
-	matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
-};
