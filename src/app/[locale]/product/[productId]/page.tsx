@@ -7,7 +7,7 @@ import { getProductById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { type ProductsListItemFragment } from "@/gql/graphql";
 import { RelatedProductList } from "@/ui/organisms/RelatedProductList";
-import { AddToCartButton } from "@/app/product/[productId]/AddToCartButton";
+import { AddToCartButton } from "@/app/[locale]/product/[productId]/AddToCartButton";
 import { addToCart, getOrCreateCart } from "@/api/cart";
 import { revalidateTag } from "next/cache";
 import { ReviewsList } from "@/ui/molecules/ReviewList";

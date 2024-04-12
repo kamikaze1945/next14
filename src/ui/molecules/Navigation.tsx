@@ -9,6 +9,7 @@ import { routes } from "@/const/routes";
 import { SearchNavbar } from "@/ui/atoms/SearchNavbar";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
+import { Route } from "next";
 
 export const Navigation = ({ quantity }: { quantity: number }) => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
@@ -31,7 +32,7 @@ export const Navigation = ({ quantity }: { quantity: number }) => {
 		<nav className="border-gray-200 bg-white py-2.5 dark:bg-gray-900">
 			<div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4">
 				{
-					<ActiveLink href="/" className="flex items-center">
+					<ActiveLink href="/pl" className="flex items-center">
 						<Logo />
 					</ActiveLink>
 				}

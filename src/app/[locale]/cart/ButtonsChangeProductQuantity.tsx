@@ -1,7 +1,7 @@
 "use client";
 
 import { useOptimistic, useState } from "react";
-import { changeProductQuantity } from "@/app/cart/action";
+import { changeProductQuantity } from "@/app/[locale]/cart/action";
 import { useRouter } from "next/navigation";
 
 export const ButtonsChangeProductQuantity = ({

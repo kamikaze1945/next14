@@ -1,7 +1,7 @@
 import { type ProductsListItemFragment } from "@/gql/graphql";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { formatMoney } from "@/utils";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { Suspense } from "react";
 
 export const RelatedProductItems = ({

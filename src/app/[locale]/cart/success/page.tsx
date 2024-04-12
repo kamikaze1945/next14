@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/navigation";
 
 export default async function CartSuccessPage({
 	searchParams,
@@ -7,7 +7,7 @@ export default async function CartSuccessPage({
 }) {
 	if (!searchParams?.sessionId) {
 		throw new Error("Session ID is not set");
-		//redirect("/cart");
+		//return redirect("/cart");
 	}
 	// if (!process.env.STRIPE_SECRET_KEY) {
 	// 	throw new Error("Stripe public key is not set");

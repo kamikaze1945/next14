@@ -1,7 +1,7 @@
 "use client";
 
-import { contactAction } from "@/app/contact/contactAction";
-import { contactSchema } from "@/app/contact/contactSchema";
+import { contactAction } from "@/app/[locale]/contact/contactAction";
+import { contactSchema } from "@/app/[locale]/contact/contactSchema";
 import { useTypesafeFormState } from "@/types/typesafeForm";
 import clsx from "clsx";
 import { useRef } from "react";

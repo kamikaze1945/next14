@@ -1,10 +1,10 @@
 import { Overlay } from "@/ui/atoms/Overlay";
 import { getCartIdFromCookies } from "@/api/cart";
-import { handlePaymentAction } from "@/app/cart/action";
+import { handlePaymentAction } from "@/app/[locale]/cart/action";
 import Image from "next/image";
 import { formatMoney } from "@/utils";
-import { ButtonsChangeProductQuantity } from "@/app/cart/ButtonsChangeProductQuantity";
-import { ButtonRemoveProduct } from "@/app/cart/ButtonRemoveProduct";
+import { ButtonsChangeProductQuantity } from "@/app/[locale]/cart/ButtonsChangeProductQuantity";
+import { ButtonRemoveProduct } from "@/app/[locale]/cart/ButtonRemoveProduct";
 import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export default async function ModalCart() {

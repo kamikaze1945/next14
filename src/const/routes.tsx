@@ -3,7 +3,7 @@ import { type AppRoute } from "@/types/routes";
 
 export const routes: AppRoute[] = [
 	{
-		href: "/",
+		href: "/" as Route,
 		label: "Home",
 	},
 	{

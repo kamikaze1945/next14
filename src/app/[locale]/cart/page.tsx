@@ -1,16 +1,16 @@
 import Image from "next/image";
 import { getCartIdFromCookies } from "@/api/cart";
 import { formatMoney } from "@/utils";
-import { ButtonsChangeProductQuantity } from "@/app/cart/ButtonsChangeProductQuantity";
-import { ButtonRemoveProduct } from "@/app/cart/ButtonRemoveProduct";
-import { handlePaymentAction } from "@/app/cart/action";
+import { ButtonsChangeProductQuantity } from "@/app/[locale]/cart/ButtonsChangeProductQuantity";
+import { ButtonRemoveProduct } from "@/app/[locale]/cart/ButtonRemoveProduct";
+import { handlePaymentAction } from "@/app/[locale]/cart/action";
 import { PageTitle } from "@/ui/atoms/PageTitle";
 
 export default async function CartPage() {
 	const cart = await getCartIdFromCookies();
 
 	if (!cart) {
-		//	redirect("/products");
+		//	return redirect("/products");
 	}
 
 	return (

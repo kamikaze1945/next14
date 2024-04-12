@@ -1,6 +1,6 @@
 "use client";
 
-import { removeItemProduct } from "@/app/cart/action";
+import { removeItemProduct } from "@/app/[locale]/cart/action";
 import { startTransition, useTransition } from "react";
 import { useRouter } from "next/navigation";
 

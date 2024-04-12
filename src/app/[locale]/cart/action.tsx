@@ -6,7 +6,7 @@ import {
 	CartChangeItemQuantityDocument,
 	CartRemoveProductDocument,
 } from "@/gql/graphql";
-import { redirect } from "next/navigation";
+import { redirect } from "@/navigation";
 import { cookies } from "next/headers";
 import Stripe from "stripe";
 import { revalidateTag } from "next/cache";
@@ -89,5 +89,5 @@ export async function handlePaymentAction() {
 	}
 
 	cookies().set("cartId", "");
-	redirect(checkoutSession.url);
+	return redirect(checkoutSession.url);
 }

@@ -2,7 +2,7 @@ import { getOrdersByEmail } from "@/api/orders";
 import { PageTitle } from "@/ui/atoms/PageTitle";
 import { formatMoney } from "@/utils";
 import { auth, currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { redirect } from "@/navigation";
 
 interface Order {
 	lines: Line[];
@@ -19,7 +19,7 @@ export default async function OrderPage() {
 
 	JSON.stringify(user);
 	if (!user) {
-		redirect("/sign-in");
+		return redirect("/sign-in");
 	}
 
 	const email = user.emailAddresses[0]?.emailAddress;

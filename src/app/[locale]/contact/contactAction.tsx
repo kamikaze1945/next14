@@ -3,7 +3,7 @@
 import {
 	ContactFormType,
 	contactSchema,
-} from "@/app/contact/contactSchema";
+} from "@/app/[locale]/contact/contactSchema";
 import { resolve } from "path";
 import { set } from "zod";
 console.log("contactActions");

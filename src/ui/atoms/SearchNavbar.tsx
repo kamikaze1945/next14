@@ -1,6 +1,7 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { type Route } from "next";
 import { useDebounceCallback } from "usehooks-ts";
